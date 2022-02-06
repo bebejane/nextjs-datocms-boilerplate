@@ -59,6 +59,7 @@
     @include mq($until: desktop) {
       display: none;
     }
+
     position: absolute;
     display: flex;
     align-items: center;
