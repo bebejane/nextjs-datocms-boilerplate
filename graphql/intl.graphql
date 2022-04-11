@@ -4,4 +4,3 @@ query GetIntl( $locale: SiteLocale = en, $fallbackLocales: [SiteLocale!] = [en],
     value
 	}
 }
-
