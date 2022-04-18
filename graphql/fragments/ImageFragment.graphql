@@ -9,6 +9,7 @@ fragment ImageFragment on FileField {
   title
   url
   width
+  customData
   responsiveImage {
     alt
     aspectRatio
@@ -22,4 +23,5 @@ fragment ImageFragment on FileField {
     title
     width
   }
+  
 }
