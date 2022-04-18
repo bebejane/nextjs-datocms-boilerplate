@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import { withGlobalProps } from "/lib/utils";
+import { withGlobalProps } from "/lib/hoc";
 import Markdown from '/lib/dato/components/Markdown';
 import StructuredContent from '/lib/dato/components/structured-content';
 
