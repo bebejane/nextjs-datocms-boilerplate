@@ -4,5 +4,6 @@ import { GetGlobal } from  "./global.graphql";
 
 export {
   GetSiteSEO,
-  GetIntl
+  GetIntl,
+  GetGlobal
 }
