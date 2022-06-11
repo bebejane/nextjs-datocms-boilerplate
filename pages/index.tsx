@@ -7,15 +7,7 @@ export default function Home(props : any) {
 
 	return (
 		<div className={styles.container}>
-			{siteName ? 
-				siteName
-			:
-				<>
-					NextJS + Dato
-					<br/>
-					rename "/.env.local.example" to "/.env.local"
-				</>
-			}
+			{siteName ? siteName : 'NextJS + Dato'}
 		</div>
 	)
 }
