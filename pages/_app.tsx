@@ -1,9 +1,10 @@
 import '/styles/index.scss'
+import type { AppProps } from 'next/app'
 import DatoSEO from '/lib/dato/components/DatoSEO';
 import { GoogleAnalytics, usePagesViews } from "nextjs-google-analytics";
 import { useRouter } from 'next/router';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps } : AppProps) {
   
   if(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID) usePagesViews(); // Google Analytics page view tracker
 

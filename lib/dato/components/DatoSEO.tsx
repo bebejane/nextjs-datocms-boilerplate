@@ -1,8 +1,8 @@
 import { NextSeo, DefaultSeo } from 'next-seo';
 
-const DatoSEO = ({seo = {}, site = {}, pathname, title, description}) => {
+const DatoSEO = ({seo = {}, site = {}, pathname, title, description} : any) => {
   
-  const meta = parseDatoMetaTags({seo,site,pathname}) 
+  const meta = parseDatoMetaTags({seo, site, pathname}) 
   const { globalSeo, favicon } = site
   const favicons = favicon ? favicon.map(({ attributes }) => {return {...attributes} }) : [];
   const images = generateImages(meta["og:image"], meta["og:image:width"], meta["og:image:height"])
@@ -10,6 +10,14 @@ const DatoSEO = ({seo = {}, site = {}, pathname, title, description}) => {
 
   title = title ? title : globalSeo ? `${globalSeo?.siteName} ${globalSeo?.titleSuffix}` : 'No Site Title';
   description = description || meta.description || globalSeo ? globalSeo?.fallbackSeo.description : 'Site description';;
+
+  const twitterProps : any = {
+    title,
+    image: meta["og:image"],
+    handle: globalSeo?.twitterAccount,
+    site: globalSeo?.twitterAccount,
+    cardType: 'summary_large_image',
+  }
 
   return (
     <NextSeo
@@ -25,13 +33,7 @@ const DatoSEO = ({seo = {}, site = {}, pathname, title, description}) => {
         type:meta["og:type"],
         site_name:meta["og:site_name"],
       }}
-      twitter={ globalSeo && {
-        title,
-        image: meta["og:image"],
-        handle: globalSeo.twitterAccount,
-        site: globalSeo.twitterAccount,
-        cardType: 'summary_large_image',
-      }}
+      twitter={ twitterProps }
       additionalLinkTags={favicons} 
     />
   )
@@ -67,7 +69,7 @@ const generateImages = (url, width, height) => {
   return images
 }
 
-const parseDatoMetaTags = ({seo, site, pathname}) => {
+const parseDatoMetaTags = ({seo, site, pathname} : any) : any => {
 
 	if(!seo || !site) return []
 	

@@ -1,6 +1,7 @@
+import { DocumentNode } from 'graphql/language/ast';
 import gql from 'graphql-tag';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { GetIntl } from '/graphql/intl.graphql';
+import GetIntl from '/graphql/intl.graphql';
 import { SiteClient } from 'datocms-client';
 
 const isServer = typeof window === 'undefined';
@@ -22,13 +23,10 @@ const client = new ApolloClient({
   }
 });
 
-const apiQuery = async (query, params = {}, preview = false, token = GRAPHQL_API_TOKEN) => {
+const apiQuery = async ( query : DocumentNode | [DocumentNode], params : any = {}, preview : boolean = false, token : string = GRAPHQL_API_TOKEN) : Promise<any> => {
   
   if(!query) throw "Invalid Query!"
   if(!GRAPHQL_API_TOKEN) throw "No api token in .env.local"
-
-  if(Array.isArray(query) && (query.length === 0)) 
-    return {}
 
   const batch = (Array.isArray(query) ? query : [query]).map((q, idx) => {
     const variables = Array.isArray(params) && params.length > idx -1 ? params[idx] : params || {}
@@ -56,7 +54,7 @@ const SEOQuery = (schema) => {
   `
 }
 
-const intlQuery = async (page, locale, fallbackLocales = ['en']) =>{
+const intlQuery = async (page : string, locale : string, fallbackLocales : [string] = ['en']) : Promise<any> => {
 
   const { messages } = await apiQuery(GetIntl, {page, locale, fallbackLocales})
   const intl = {[page]:{}}
