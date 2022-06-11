@@ -1,9 +1,10 @@
 import styles from './index.module.scss'
+import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
 import { withGlobalProps } from "/lib/hoc";
 import Markdown from '/lib/dato/components/Markdown';
 import StructuredContent from '/lib/dato/components/structured-content';
 
-export default function Home(props){
+export default function Home(props : any) {
 	return (
 		<div className={styles.container}>
 			NextJS + Dato
