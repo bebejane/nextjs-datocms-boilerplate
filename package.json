@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "serve": "npm run build && npm run start"
+    "preview": "npm run build && npm run start"
   },
   "dependencies": {
     "@apollo/client": "^3.6.2",
@@ -33,6 +33,7 @@
     "remark-gfm": "^3.0.1",
     "rooks": "^5.8.0",
     "sass": "^1.43.5",
+    "swiper": "^8.2.3",
     "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {

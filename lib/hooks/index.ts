@@ -1,4 +1,6 @@
 import useTransitionFix from "./useTransitionFix"
+import usePreviousRoute  from './usePreviousRoute'
 export {
-  useTransitionFix
+  useTransitionFix,
+  usePreviousRoute
 }

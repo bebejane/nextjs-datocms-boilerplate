@@ -1,15 +1,21 @@
 import styles from './index.module.scss'
 import { GetStaticProps } from 'next'
 import { withGlobalProps } from "/lib/hoc";
-import Markdown from '/lib/dato/components/Markdown';
-import StructuredContent from '/lib/dato/components/structured-content';
 
 export default function Home(props : any) {
+	const {siteName} = props
+
 	return (
 		<div className={styles.container}>
-			NextJS + Dato
-			<br/>
-			rename "/.env.local.example" to "/.env.local"
+			{siteName ? 
+				siteName
+			:
+				<>
+					NextJS + Dato
+					<br/>
+					rename "/.env.local.example" to "/.env.local"
+				</>
+			}
 		</div>
 	)
 }
