@@ -2,7 +2,7 @@ import create from "zustand";
 
 const useStore = create((set) => ({
 	showMenu: true,
-	setShowMenu: (show) =>  
+	setShowMenu: (show : boolean) =>  
     set((state) => ({
       showMenu: show
     })
