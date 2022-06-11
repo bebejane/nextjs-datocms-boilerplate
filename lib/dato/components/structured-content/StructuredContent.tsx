@@ -17,7 +17,7 @@ export default function StructuredContent({ content }) {
     <article className={styles.mainContent}>
       <StructuredText
         data={content}
-        renderBlock={({ record }) => {
+        renderBlock={({ record } : any) => {
           switch (record.__typename) {
             case 'ImageRecord':
               return <Image data={record.image} />;
@@ -33,21 +33,21 @@ export default function StructuredContent({ content }) {
               return null;
           }
         }}
-        renderInlineRecord={({ record }) => {
+        renderInlineRecord={({ record } : any) => {
           switch (record.__typename) {
-            case 'ParticipantRecord':
-              return <LinkButton href={`/${record.slug}`}>{record.title}</LinkButton>
+            //case 'Record':
+            //  return <LinkButton href={`/${record.slug}`}>{record.title}</LinkButton>
             default:
               return null;
           }
         }}
-        renderLinkToRecord={({ record, children, transformedMeta }) => {
+        renderLinkToRecord={({ record, children, transformedMeta }: any) => {
           switch (record.__typename) {
             default:
               return null;
           }
         }}
-        renderText={(text)=>{
+        renderText={(text: string)=>{
           // Replace nbsp
           return text?.replace(/\s/g, ' ');
         }}
@@ -57,8 +57,8 @@ export default function StructuredContent({ content }) {
             return <Link href={node.url}>{renderNode('a', {key}, children)}</Link>
           }),
           // Clenup paragraphs
-          renderNodeRule(isParagraph, ({ adapter: { renderNode }, node, children, key, ancestors }) => { 
-            //return renderNode('p', { key }, children)
+          renderNodeRule(isParagraph, ({ adapter: { renderNode }, node, children, key, ancestors } : any) => { 
+            
             // Remove trailing <br>
             if (isRoot(ancestors[0]) && node.children[node.children.length-1].value?.endsWith('\n')) {
               let index = node.children.length;

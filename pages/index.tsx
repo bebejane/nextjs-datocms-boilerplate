@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { withGlobalProps } from "/lib/hoc";
 import Markdown from '/lib/dato/components/Markdown';
 import StructuredContent from '/lib/dato/components/structured-content';
@@ -14,7 +14,7 @@ export default function Home(props : any) {
 	)
 }
 
-export const getStaticProps = withGlobalProps( async ({props, revalidate }) => {
+export const getStaticProps : GetStaticProps = withGlobalProps({}, async ({props, revalidate }) => {
 	
 	return {
 		props,

@@ -2,6 +2,7 @@ import Router from "next/router";
 import { useCallback, useEffect, useRef } from "react";
 
 const useTransitionFix = () => {
+
 	const cleanupRef = useRef(() => {});
 
 	useEffect(() => {
@@ -10,7 +11,7 @@ const useTransitionFix = () => {
 			// matter if Next.js is going to remove them or not since we are going to remove the copies
 			// ourselves later on when the transition finishes.
 			const nodes = document.querySelectorAll("link[rel=stylesheet], style:not([media=x])");
-			const copies = [...nodes].map((el) => el.cloneNode(true));
+			const copies = Array.from(nodes).map((el) => el.cloneNode(true) as HTMLElement)
 
 			for (let copy of copies) {
 				// Remove Next.js' data attributes so the copies are not removed from the DOM in the route

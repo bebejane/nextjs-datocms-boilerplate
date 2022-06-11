@@ -4,7 +4,9 @@ import Link from "next/link";
 import truncateMarkdown  from 'markdown-truncate'
 import remarkBreaks from 'remark-breaks'
 
-const Markdown = ({ children, truncate }) => {
+type MarkdownProps = {children: string, truncate: boolean}
+
+const Markdown = ({ children, truncate } : MarkdownProps) => {
   if(!children) return null
 
   children = !truncate ? children : truncateMarkdown(children, {limit:truncate, ellipsis:true})

@@ -1,13 +1,12 @@
-import { apiQuery, SEOQuery } from "/lib/dato/api";
+import { apiQuery, SEOQuery } from "../dato/api";
+import { GetStaticProps } from 'next'
 import { GetGlobal } from "/graphql";
+import { DocumentNode } from 'graphql/language/ast';
 
-export default function withGlobalProps(opt = {}, callback){
+export default function withGlobalProps(opt: any , callback : Function) : GetStaticProps {
   
-  callback = typeof opt === 'function' ? opt : callback;
-
-  const revalidate = parseInt(process.env.REVALIDATE_TIME || 60)
-  
-  const queries = [GetGlobal]
+  const revalidate : number = parseInt(process.env.REVALIDATE_TIME)
+  const queries :[DocumentNode] = [GetGlobal]
   
   if(opt.query) 
     queries.push(opt.query)

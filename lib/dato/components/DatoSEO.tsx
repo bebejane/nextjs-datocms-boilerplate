@@ -41,7 +41,7 @@ const DatoSEO = ({seo = {}, site = {}, pathname, title, description} : any) => {
 
 const DefaultDatoSEO = ({site, url}) => {
   const {globalSeo, favicon, globalSeo : {fallbackSeo}} = site
-  const twitterSite = globalSeo.twitterAccount ? `https://twitter.com/${globalSeo.twitterAccount.replace("@", "")}` : undefied
+  const twitterSite = globalSeo.twitterAccount ? `https://twitter.com/${globalSeo.twitterAccount.replace("@", "")}` : undefined
   return (
     <DefaultSeo
       openGraph={{
@@ -58,7 +58,7 @@ const DefaultDatoSEO = ({site, url}) => {
   )
 }
 
-const generateImages = (url, width, height) => {
+const generateImages = (url, width, height) : any => {
   if(!url) return undefined
   const baseURL  = url.split("?")[0]
   const images = [{

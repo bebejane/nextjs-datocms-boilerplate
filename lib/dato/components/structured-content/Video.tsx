@@ -3,8 +3,10 @@ import cn from "classnames";
 import { useEffect, useRef, useState } from "react";
 import { useWindowSize } from "rooks"
 
-export default function Video({ provider, providerUid, title, url, thumbnailUrl }) {
-	const ref = useRef()
+type VideoProps = { provider:string, providerUid:string, title: string, url: string, thumbnailUrl: string}
+
+export default function Video({ provider, providerUid, title, url, thumbnailUrl } : VideoProps) {
+	const ref = useRef<HTMLIFrameElement>(null);
 	const [height, setHeight] = useState(360);
 	const { innerWidth } = useWindowSize()
 
@@ -14,7 +16,6 @@ export default function Video({ provider, providerUid, title, url, thumbnailUrl 
 		<iframe
 			ref={ref}
 			id="ytplayer"
-			type="text/html"
 			width="100%"
 			height={height}
 			allowFullScreen
@@ -25,7 +26,6 @@ export default function Video({ provider, providerUid, title, url, thumbnailUrl 
 		: provider === 'vimeo' ?
 			<iframe
 				ref={ref}
-				type="text/html"
 				src={`https://player.vimeo.com/video/${providerUid}?h=${vimeoId}`}
 				width="100%"
 				height={height}
@@ -35,7 +35,10 @@ export default function Video({ provider, providerUid, title, url, thumbnailUrl 
 			/>
 			: null;
 
-	useEffect(() => setHeight((ref.current?.clientWidth / 16) * 9), [innerWidth]) // Set to 16:9
+	useEffect(() => {
+		if(!ref?.current) return
+		setHeight((ref.current.clientWidth / 16) * 9)
+	}, [innerWidth]) // Set to 16:9
 
 	return (
 		video ?

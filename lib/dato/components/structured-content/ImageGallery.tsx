@@ -5,13 +5,22 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import { useEffect, useState } from "react";
 
-export default function ImageGallery({ images, id }) {
+type ImageGalleryProps = { images:[any], id:string }
 
-	const [index, setIndex] = useState(0)
-	const [captionHeight, setCaptionHeight] = useState()
+export default function ImageGallery({ images, id } : ImageGalleryProps) {
+
+	const [index, setIndex] = useState<number>(0)
+	const [captionHeight, setCaptionHeight] = useState<number>()
 	const [lazyLoad, setLazyLoad] = useState(false)
-	useEffect(() => setCaptionHeight(document.querySelectorAll(`#ig-${id} > caption`)[index]?.clientHeight), [index])
-	useEffect(()=>setTimeout(()=>setLazyLoad(true), 2000), [])
+
+	useEffect(() => {
+		const height = document.querySelectorAll(`#ig-${id} > caption`)[index]?.clientHeight as number;
+		setCaptionHeight(height)
+	}, [index])
+	
+	useEffect(()=>{
+		setTimeout(()=>setLazyLoad(true), 2000)
+	}, [])
 
 	return (
 		<section className={styles.imageGallery}>

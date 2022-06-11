@@ -1,27 +1,28 @@
+import type { NextApiRequest, NextApiResponse } from 'next'
 import { Dato } from "/lib/dato/api"
 
 const DATO_TIMEOUT = 8000;
 
-const getPathsFromPayload = async (payload) => {
-  
-  const record = await getRecordFromPayload(payload)
+const getPathsFromPayload = async (payload : any, record : any) => {
   const paths = []
   const { apiKey } = record.model;
   
-  
+  // Generate paths here
+
   return paths;
 }
 
-export default async (req, res) => {
+export default async (req : NextApiRequest, res : NextApiResponse) => {
 
   if(!basicAuth(req)) return res.status(401).send('Access denied')
   
   try{
     
     const payload = req.body?.entity;
+    const record = await getRecordFromPayload(payload)
     if(!payload) throw 'Payload is empty'
 
-    const paths = await getPathsFromPayload(payload)
+    const paths = await getPathsFromPayload(payload, record)
     
     if(!paths.length) 
       throw new Error(`Nothing to revalidate`);
@@ -39,7 +40,7 @@ export default async (req, res) => {
   }
 }
 
-const getRecordFromPayload = async (payload) => {
+const getRecordFromPayload = async (payload : any) => {
   
   const modelId = payload?.relationships?.item_type?.data?.id
   
@@ -53,7 +54,7 @@ const getRecordFromPayload = async (payload) => {
   return {...record, model}
 }
 
-const basicAuth = (req) => {
+const basicAuth = (req : NextApiRequest) => {
   const basicAuth = req.headers.authorization
   if (!basicAuth) return true;
 
