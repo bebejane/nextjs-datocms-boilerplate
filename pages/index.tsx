@@ -3,8 +3,8 @@ import { GetStaticProps } from 'next'
 import { withGlobalProps } from "/lib/hoc";
 
 export default function Home(props : any) {
-	const {siteName} = props
-
+	const { siteName } = props
+	
 	return (
 		<div className={styles.container}>
 			{siteName ? siteName : 'NextJS + Dato'}

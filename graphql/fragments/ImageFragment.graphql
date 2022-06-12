@@ -23,5 +23,4 @@ fragment ImageFragment on FileField {
     title
     width
   }
-  
 }

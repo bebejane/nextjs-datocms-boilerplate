@@ -1,10 +1,10 @@
 import { DocumentNode } from 'graphql/language/ast';
 import gql from 'graphql-tag';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
-import GetIntl from '/graphql/intl.graphql';
+import GetIntl from '/graphql/GetIntl.graphql';
 import { SiteClient } from 'datocms-client';
+import { isServer } from '/lib/utils';
 
-const isServer = typeof window === 'undefined';
 const GRAPHQL_API_ENDPOINT = `https://graphql.datocms.com`;
 const GRAPHQL_PREVIEW_API_ENDPOINT = `https://graphql.datocms.com/preview`;
 const GRAPHQL_API_TOKEN = isServer ? process.env.GRAPHQL_API_TOKEN : process.env.NEXT_PUBLIC_GRAPHQL_API_TOKEN
