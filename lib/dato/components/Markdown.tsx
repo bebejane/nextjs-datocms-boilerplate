@@ -3,26 +3,31 @@ import gfm from 'remark-gfm'
 import Link from "next/link";
 import truncateMarkdown  from 'markdown-truncate'
 import remarkBreaks from 'remark-breaks'
+import type { UrlObject } from 'url';
 
-type MarkdownProps = {children: string, truncate: boolean}
+type MarkdownProps = {children: string, truncate?: boolean}
+type AnchorProp = {children:[any], href: UrlObject }
 
-const Markdown = ({ children, truncate } : MarkdownProps) => {
+const Markdown = ({ children , truncate } : MarkdownProps) => {
   if(!children) return null
 
-  children = !truncate ? children : truncateMarkdown(children, {limit:truncate, ellipsis:true})
+  const content = !truncate ? children : truncateMarkdown(children, {limit:truncate, ellipsis:true})
 
   return (
     <ReactMarkdown 
       remarkPlugins={[gfm, remarkBreaks]} 
-      children={children}
+      // eslint-disable-next-line react/no-children-prop
+      children={content}
       components={{
-        a: ({ node, ...props }) => 
-        <Link prefetch={false} 
-          href={props.href} 
-          scroll={false}
-        >
-          <a>{props.children[0]}</a>
-        </Link>
+        // @ts-ignore
+        a: ({ children, href } : AnchorProp) => 
+          <Link 
+            href={href} 
+            prefetch={false}
+            scroll={false}
+          >
+            <a>{children[0]}</a>
+          </Link>
       }}
     />
   )

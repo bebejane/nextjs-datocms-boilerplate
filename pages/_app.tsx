@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps } : AppProps) {
   
-  if(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID) usePagesViews(); // Google Analytics page view tracker
+  //usePagesViews(); // Google Analytics page view tracker = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 
   const router = useRouter()
   const { asPath : pathname } = router

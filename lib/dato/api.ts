@@ -2,15 +2,16 @@ import { DocumentNode } from 'graphql/language/ast';
 import gql from 'graphql-tag';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import GetIntl from '/graphql/GetIntl.graphql';
-import { SiteClient } from 'datocms-client';
+import { buildClient } from '@datocms/cma-client-node';
+import { buildClient as buildClientBrowser} from '@datocms/cma-client-browser';
 import { isServer } from '/lib/utils';
 
-const GRAPHQL_API_ENDPOINT = `https://graphql.datocms.com`;
-const GRAPHQL_PREVIEW_API_ENDPOINT = `https://graphql.datocms.com/preview`;
-const GRAPHQL_API_TOKEN = isServer ? process.env.GRAPHQL_API_TOKEN : process.env.NEXT_PUBLIC_GRAPHQL_API_TOKEN
+export const GRAPHQL_API_ENDPOINT = `https://graphql.datocms.com`;
+export const GRAPHQL_PREVIEW_API_ENDPOINT = `https://graphql.datocms.com/preview`;
+export const GRAPHQL_API_TOKEN = (isServer ? process.env.GRAPHQL_API_TOKEN : process.env.NEXT_PUBLIC_GRAPHQL_API_TOKEN) || null
+export const Dato = (isServer ? buildClient : buildClientBrowser)({apiToken:GRAPHQL_API_TOKEN})
 
-const Dato = new SiteClient(GRAPHQL_API_TOKEN)
-const client = new ApolloClient({
+export const client = new ApolloClient({
   uri: GRAPHQL_API_ENDPOINT,
   cache: new InMemoryCache(),
   headers: { Authorization: `Bearer ${GRAPHQL_API_TOKEN}` },
@@ -23,14 +24,19 @@ const client = new ApolloClient({
   }
 });
 
-const apiQuery = async ( query : DocumentNode | [DocumentNode], params : any = {}, preview : boolean = false, token : string = GRAPHQL_API_TOKEN) : Promise<any> => {
+export type ApiQueryOptions = {variables : any | [any], preview?: boolean}
+
+export const apiQuery = async (query: DocumentNode | [DocumentNode], {variables, preview = false} : ApiQueryOptions) : Promise<any> => {
   
-  if(!query) throw "Invalid Query!"
-  if(!GRAPHQL_API_TOKEN) throw "No api token in .env.local"
+  if(query === null) 
+    throw "Invalid Query!"
+
+  if(!GRAPHQL_API_TOKEN) 
+    throw "No api token in .env.local"
 
   const batch = (Array.isArray(query) ? query : [query]).map((q, idx) => {
-    const variables = Array.isArray(params) && params.length > idx -1 ? params[idx] : params || {}
-    return client.query({query:q, variables})
+    const vars = Array.isArray(variables) && variables.length > idx -1 ? variables[idx] : variables || {}
+    return client.query({query:q, variables:vars})
   })
   
   const data = await Promise.all(batch)
@@ -39,7 +45,7 @@ const apiQuery = async ( query : DocumentNode | [DocumentNode], params : any = {
   return result
 }
 
-const SEOQuery = (schema) => {
+export const SEOQuery = (schema: string) => {
   return gql`
     query GetSEO {
       seo: ${schema} {
@@ -54,24 +60,18 @@ const SEOQuery = (schema) => {
   `
 }
 
-const intlQuery = async (page : string, locale : string, fallbackLocales : [string] = ['en']) : Promise<any> => {
+type IntlMessage = { key:string, value:string }
 
-  const { messages } = await apiQuery(GetIntl, {page, locale, fallbackLocales})
-  const intl = {[page]:{}}
-  messages.forEach(({key, value})=> intl[page][key] = value)
-  return  intl
+export const intlQuery = async (page : string, locale : string, fallbackLocales : [string] = ['en']) : Promise<any> => {
+
+  const res = await apiQuery(GetIntl, { variables: { page, locale, fallbackLocales }})
+  const messages : [IntlMessage] = res.messages
+  const dictionary : {[page:string]: any} = {[page]:{}}
+  messages.forEach(({key, value}) => dictionary[page][key] = value)
+  return dictionary
 }
 
-const datoError = (err) =>{
+export const datoError = (err : Error) =>{
   console.log(err)
   return err.message || err
-}
-
-export {
-  apiQuery,
-  SEOQuery,
-  intlQuery,
-  datoError,
-  Dato,
-  client
 }

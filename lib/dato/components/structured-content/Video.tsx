@@ -45,7 +45,7 @@ export default function Video({ provider, providerUid, title, url, thumbnailUrl 
 			<section className={styles.video}>
 				{video}
 			</section>
-			:
+		:
 			<span>Video {provider} not supported!</span>
 	)
 }

@@ -9,7 +9,7 @@ import Image from './Image'
 import ImageGallery from './ImageGallery'
 import Video from './Video'
 
-export default function StructuredContent({ content }) {
+export default function StructuredContent({ content } : any) {
   
   if (!content) return null 
 
@@ -77,7 +77,7 @@ export default function StructuredContent({ content }) {
             }
 
             // Filter out empty paragraphs
-            children = children.filter(c => !(c.props.children.length === 1 && !c.props.children[0]))
+            children = children.filter((c: any) => !(c.props.children.length === 1 && !c.props.children[0]))
 
             // If no children remove tag completely
             if(!children.length) return null

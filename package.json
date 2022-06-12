@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.2",
+    "@datocms/cma-client-browser": "^1.0.0",
+    "@datocms/cma-client-node": "^1.0.0",
     "classnames": "^2.3.1",
     "datocms-client": "^3.5.19",
     "datocms-structured-text-utils": "^2.0.0",
