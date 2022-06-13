@@ -40,6 +40,11 @@ export const apiQuery = async (query: DocumentNode | [DocumentNode], {variables,
   })
   
   const data = await Promise.all(batch)
+  const errors = data.filter(({errors}) => errors).map(({errors})=> errors?.reduce((curr, acc) => curr + '. ' + acc.message, ''))
+
+  if(errors.length)
+    throw new Error(errors.join('. '))
+    
   let result = {}
   data.forEach((res) => result = {...result, ...res?.data})
   return result
