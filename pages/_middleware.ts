@@ -2,7 +2,6 @@ import { NextResponse, NextRequest } from 'next/server'
 
 export function middleware(req : NextRequest) {
 
-  
   const isRevalidationRequest = !!req.headers.get("x-prerender-revalidate");
   const noAuth = !process.env.BASIC_AUTH_USER && !process.env.BASIC_AUTH_PASSWORD
 
@@ -13,7 +12,7 @@ export function middleware(req : NextRequest) {
 
   if (basicAuth) {
     const auth = basicAuth.split(' ')[1]
-    const [user, pwd] = Buffer.from(auth, 'base64').toString().split(':')
+    const [user, pwd] = atob(auth).toString().split(':')
 
     if (user === process.env.BASIC_AUTH_USER && pwd === process.env.BASIC_AUTH_PASSWORD)
       return NextResponse.next()
