@@ -34,3 +34,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# Dato introspection types
+@types/datocms.d.ts

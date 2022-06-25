@@ -1,10 +1,11 @@
-import { DocumentNode } from 'graphql/language/ast';
-import gql from 'graphql-tag';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
-import GetIntl from '/graphql/GetIntl.graphql';
+import { GetIntlDocument } from '/graphql';
 import { buildClient } from '@datocms/cma-client-node';
 import { buildClient as buildClientBrowser} from '@datocms/cma-client-browser';
 import { isServer } from '/lib/utils';
+import { TypedDocumentNode, gql } from '@apollo/client';
+
+export type IntlMessage = { key:string, value:string }
 
 export const GRAPHQL_API_ENDPOINT = `https://graphql.datocms.com`;
 export const GRAPHQL_PREVIEW_API_ENDPOINT = `https://graphql.datocms.com/preview`;
@@ -24,9 +25,9 @@ export const client = new ApolloClient({
   }
 });
 
-export type ApiQueryOptions = {variables : any | [any], preview?: boolean}
+export type ApiQueryOptions = {variables?: any | any[], preview?: boolean}
 
-export const apiQuery = async (query: DocumentNode | [DocumentNode], {variables, preview = false} : ApiQueryOptions) : Promise<any> => {
+export const apiQuery = async (query: TypedDocumentNode | TypedDocumentNode[], {variables, preview = false} : ApiQueryOptions) : Promise<any> => {
   
   if(query === null) 
     throw "Invalid Query!"
@@ -44,13 +45,13 @@ export const apiQuery = async (query: DocumentNode | [DocumentNode], {variables,
 
   if(errors.length)
     throw new Error(errors.join('. '))
-    
+  
   let result = {}
   data.forEach((res) => result = {...result, ...res?.data})
   return result
 }
 
-export const SEOQuery = (schema: string) => {
+export const SEOQuery = (schema: string) : TypedDocumentNode => {
   return gql`
     query GetSEO {
       seo: ${schema} {
@@ -62,14 +63,12 @@ export const SEOQuery = (schema: string) => {
         }
       }
     }
-  `
+  ` as TypedDocumentNode
 }
 
-type IntlMessage = { key:string, value:string }
+export const intlQuery = async (page : string, locale: string = 'en', fallbackLocales: string[]) : Promise<any> => {
 
-export const intlQuery = async (page : string, locale : string, fallbackLocales : [string] = ['en']) : Promise<any> => {
-
-  const res = await apiQuery(GetIntl, { variables: { page, locale, fallbackLocales }})
+  const res = await apiQuery(GetIntlDocument, {variables: { page, locale, fallbackLocales }})
   const messages : [IntlMessage] = res.messages
   const dictionary : {[page:string]: any} = {[page]:{}}
   messages.forEach(({key, value}) => dictionary[page][key] = value)

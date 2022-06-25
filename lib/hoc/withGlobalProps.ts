@@ -1,12 +1,12 @@
 import { apiQuery, SEOQuery } from "../dato/api";
 import { GetStaticProps } from 'next'
-import { GetGlobal } from "/graphql";
-import { DocumentNode } from 'graphql/language/ast';
+import { GetGlobalDocument } from "/graphql";
+import type { TypedDocumentNode } from "@apollo/client";
 
 export default function withGlobalProps(opt: any , callback : Function) : GetStaticProps {
   
   const revalidate : number = parseInt(process.env.REVALIDATE_TIME)
-  const queries :[DocumentNode] = [GetGlobal]
+  const queries: TypedDocumentNode[] = [GetGlobalDocument]
   
   if(opt.query) 
     queries.push(opt.query)
@@ -16,7 +16,7 @@ export default function withGlobalProps(opt: any , callback : Function) : GetSta
     queries.push(SEOQuery(opt.model))
   
   return async (context) => {
-    const props = await apiQuery(queries, {}, context.preview);
+    const props = await apiQuery(queries, {preview:context.preview});
 
     if(callback)
       return await callback({context, props: {...props}, revalidate});
