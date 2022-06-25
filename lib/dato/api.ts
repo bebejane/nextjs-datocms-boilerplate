@@ -27,8 +27,9 @@ export const client = new ApolloClient({
 
 export type ApiQueryOptions = {variables?: any | any[], preview?: boolean}
 
-export const apiQuery = async (query: TypedDocumentNode | TypedDocumentNode[], {variables, preview = false} : ApiQueryOptions) : Promise<any> => {
+export const apiQuery = async (query: TypedDocumentNode | TypedDocumentNode[], options? : ApiQueryOptions) : Promise<any> => {
   
+  const { variables, preview = false} = options || {}
   if(query === null) 
     throw "Invalid Query!"
 
