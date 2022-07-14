@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server'
 
 export function middleware(req : NextRequest) {
-
+  
   const isRevalidationRequest = !!req.headers.get("x-prerender-revalidate");
   const noAuth = !process.env.BASIC_AUTH_USER && !process.env.BASIC_AUTH_PASSWORD
 

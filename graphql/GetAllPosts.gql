@@ -1,0 +1,16 @@
+#import "./fragments/ImageFragment.gql"
+#import "./fragments/VideoFragment.gql"
+
+query GetAllPosts{
+  allPosts {
+    title
+    image{
+      ...ImageFragment
+    }
+    video{
+      ...VideoFragment
+    }
+
+  }
+
+}

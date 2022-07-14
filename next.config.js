@@ -24,6 +24,7 @@ const nextOptions = {
       exclude: /node_modules/,
       loader: 'graphql-tag/loader',
     });
+    config.resolve.fallback = { fs: false, dns:false, net:false };
     return config;
   },
   webpackDevMiddleware: (config) => {

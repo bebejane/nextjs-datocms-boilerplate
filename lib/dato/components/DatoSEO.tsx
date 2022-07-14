@@ -8,7 +8,7 @@ const DatoSEO = ({seo = {}, site = {}, pathname, title, description} : any) => {
   const images = generateImages(meta["og:image"], meta["og:image:width"], meta["og:image:height"])
   const url = `${process.env.NEXT_PUBLIC_SITE_URL}${pathname || ''}`
 
-  title = title ? title : globalSeo ? `${globalSeo?.siteName} ${globalSeo?.titleSuffix}` : 'No Site Title';
+  title = title ? title : globalSeo ? `${globalSeo?.siteName} ${globalSeo?.titleSuffix}` : 'notite';
   description = description || meta.description || globalSeo ? globalSeo?.fallbackSeo.description : 'Site description';;
 
   const twitterProps : any = {

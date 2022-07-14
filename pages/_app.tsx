@@ -1,4 +1,6 @@
 import '/styles/index.scss'
+import { ApolloProvider } from '@apollo/client';
+import { client } from '/lib/dato/api';
 import type { AppProps } from 'next/app'
 import DatoSEO from '/lib/dato/components/DatoSEO';
 import { GoogleAnalytics, usePagesViews } from "nextjs-google-analytics";

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "predev": "yarn codegen",
     "dev:cache": "DEV_CACHE=true next dev",
     "build": "next build",
     "start": "next start",
@@ -15,6 +16,7 @@
     "@apollo/client": "^3.6.2",
     "@datocms/cma-client-browser": "^1.0.0",
     "@datocms/cma-client-node": "^1.0.0",
+    "@graphql-codegen/typescript-react-apollo": "^3.2.16",
     "classnames": "^2.3.1",
     "datocms-client": "^3.5.19",
     "datocms-structured-text-utils": "^2.0.0",
@@ -40,7 +42,7 @@
     "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/cli": "^2.8.1",
     "@graphql-codegen/import-types-preset": "^2.1.20",
     "@graphql-codegen/introspection": "2.1.1",
     "@graphql-codegen/typed-document-node": "^2.2.13",

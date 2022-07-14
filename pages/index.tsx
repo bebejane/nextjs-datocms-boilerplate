@@ -1,25 +1,30 @@
 import styles from './index.module.scss'
 import { GetStaticProps } from 'next'
 import { withGlobalProps } from "/lib/hoc";
-import Markdown from '/lib/dato/components/Markdown';
+import { GetAllPostsDocument } from '/graphql';
 
-export default function Home(props : any) {
-	const { siteName } = props
+import type { PostRecord, Site } from '/@types/datocms';
+import { useGetGlobalQuery } from '/graphql/hooks';
+
+export type HomeProps = { site:Site, allPosts : PostRecord[]}
+
+export default function Home({site, allPosts} : HomeProps) {
 	
 	return (
 		<div className={styles.container}>
-			{siteName ? siteName : 'NextJS + Dato'}
-			<Markdown>
-				hej
-			</Markdown>
+			
 		</div>
 	)
 }
 
-export const getStaticProps : GetStaticProps = withGlobalProps({}, async ({props, revalidate } : any) => {
+/*
+export const getStaticProps : GetStaticProps = withGlobalProps({
+	queries:[GetAllPostsDocument]
+}, async ({props, revalidate } : any) => {
 	
 	return {
 		props,
 		revalidate
 	};
 });
+*/

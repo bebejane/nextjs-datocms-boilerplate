@@ -26,7 +26,7 @@ module.exports = {
 						"typescript",
 						"typescript-operations",
 					],
-					config
+					config:{...config, noExport: true}
 				},
         "graphql/index.ts": {
           plugins: ["typed-document-node"],
@@ -35,6 +35,10 @@ module.exports = {
         "@types/document-modules.d.ts": {
           plugins: ["typescript-graphql-files-modules"],
 					config
+        },
+				"graphql/hooks.ts": {
+          plugins: ["typescript-react-apollo"],
+					config:{...config, withHooks:true}
         },
 			},
 		}

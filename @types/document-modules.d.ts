@@ -1,17 +1,17 @@
 
-declare module '*/GetGlobal.gql' {
+declare module '*/GetAllPosts.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const GetGlobal: DocumentNode;
+  export const GetAllPosts: DocumentNode;
 
   export default defaultDocument;
 }
     
 
-declare module '*/GetIntl.gql' {
+declare module '*/GetGlobal.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const GetIntl: DocumentNode;
+  export const GetGlobal: DocumentNode;
 
   export default defaultDocument;
 }
@@ -48,6 +48,15 @@ declare module '*/SiteFragment.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const SiteFragment: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/VideoFragment.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const VideoFragment: DocumentNode;
 
   export default defaultDocument;
 }
