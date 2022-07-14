@@ -16,7 +16,6 @@ fragment VideoFragment on FileField {
     mp4med: mp4Url(res: medium)
     mp4low: mp4Url(res: low)
     framerate
-    duration
-    
+    duration 
   }
 }
