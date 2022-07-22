@@ -3,7 +3,7 @@ import styles from './index.module.scss'
 import { GetStaticProps } from 'next'
 import { withGlobalProps } from "/lib/hoc";
 import { GetAllPostsDocument } from '/graphql';
-import { useGetGlobalQuery } from '/graphql/hooks';
+//import { useGetGlobalQuery } from '/graphql/hooks';
 
 export type HomeProps = { site:Site, allPosts: PostRecord[]}
 
