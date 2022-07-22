@@ -29,7 +29,7 @@ export default async (req : NextApiRequest, res : NextApiResponse) => {
     
     const t = new Date().getTime()
     const to = setTimeout(()=>res.json({ revalidated: true, paths, duration:DATO_TIMEOUT, timeout:true}), DATO_TIMEOUT)
-    const result = await Promise.all(paths.map(path => res.unstable_revalidate(path)))
+    const result = await Promise.all(paths.map(path => res.revalidate(path)))
     clearTimeout(to)
     const duration = (new Date().getTime()-t)
     if(duration > DATO_TIMEOUT)  return
