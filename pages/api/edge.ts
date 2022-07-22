@@ -7,9 +7,9 @@ export const config = {
 export default async function handler(req: NextRequest) {
   return new Response(
     JSON.stringify({
-      city: req.headers['x-vercel-ip-city'],
-      country: req.headers['x-vercel-ip-country'],
-      region: req.headers['x-vercel-ip-country-region'],
+      city: req.headers.get('x-vercel-ip-city'),
+      country: req.headers.get('x-vercel-ip-country'),
+      region: req.headers.get('x-vercel-ip-country-region'),
       headers:{...req.headers}
     }),
     {
