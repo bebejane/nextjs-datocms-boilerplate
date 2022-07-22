@@ -12,9 +12,19 @@ const getPathsFromPayload = async (payload : any, record : any) => {
   return paths;
 }
 
-export default async (req : NextApiRequest, res : NextApiResponse) => {
+export const basicAuth = (req : NextApiRequest) => {
+  const basicAuth = req.headers.authorization
+  if (!basicAuth) return true;
 
-  if(!basicAuth(req)) return res.status(401).send('Access denied')
+  const auth = basicAuth.split(' ')[1]
+  const [user, pwd] = Buffer.from(auth, 'base64').toString().split(':')
+  return user === process.env.BASIC_AUTH_USER && pwd === process.env.BASIC_AUTH_PASSWORD
+} 
+
+export default async function handler(req : NextApiRequest, res : NextApiResponse){
+
+  if(!basicAuth(req)) 
+    return res.status(401).send('Access denied')
   
   try{
     
@@ -46,19 +56,11 @@ const getRecordFromPayload = async (payload : any) => {
   
   if(!modelId) throw 'Model id not found in payload!'
 
-  const models = await Dato.itemTypes.all();
+  const models = await Dato.itemTypes.list();
   const model = models.filter(m => m.id === modelId)[0]
-  const record = (await Dato.items.all({filter: {type: model.apiKey, fields:{id: {eq:payload.id }}}},{allPages: true}))[0]
+  const record = (await Dato.items.list({filter: {type: model.api_key, fields:{id: {eq:payload.id }}}}))[0]
   if(!record) 
     throw `No record found with modelId: ${modelId}`
   return {...record, model}
 }
 
-const basicAuth = (req : NextApiRequest) => {
-  const basicAuth = req.headers.authorization
-  if (!basicAuth) return true;
-
-  const auth = basicAuth.split(' ')[1]
-  const [user, pwd] = Buffer.from(auth, 'base64').toString().split(':')
-  return user === process.env.BASIC_AUTH_USER && pwd === process.env.BASIC_AUTH_PASSWORD
-} 
