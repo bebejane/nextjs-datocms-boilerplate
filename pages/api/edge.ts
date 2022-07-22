@@ -9,7 +9,8 @@ export default async function handler(req: NextRequest) {
     JSON.stringify({
       city: req.headers['x-vercel-ip-city'],
       country: req.headers['x-vercel-ip-country'],
-      region: req.headers['x-vercel-ip-country-region']
+      region: req.headers['x-vercel-ip-country-region'],
+      headers:{...req.headers}
     }),
     {
       status: 200,
