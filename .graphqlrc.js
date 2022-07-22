@@ -1,4 +1,5 @@
 require("@next/env").loadEnvConfig(".");
+
 const config =  {
 	dedupeOperationSuffix:true,
 	dedupeFragments: true,
@@ -6,7 +7,6 @@ const config =  {
 	exportFragmentSpreadSubTypes: true,
 	namingConvention: "keep",
 	skipDocumentsValidation: true
-	
 }
 
 module.exports = {

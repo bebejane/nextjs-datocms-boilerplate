@@ -1,5 +1,4 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { GetIntlDocument } from '/graphql';
 import { buildClient } from '@datocms/cma-client-node';
 import { buildClient as buildClientBrowser} from '@datocms/cma-client-browser';
 import { isServer } from '/lib/utils';
@@ -65,15 +64,6 @@ export const SEOQuery = (schema: string) : TypedDocumentNode => {
       }
     }
   ` as TypedDocumentNode
-}
-
-export const intlQuery = async (page : string, locale: string = 'en', fallbackLocales: string[]) : Promise<any> => {
-
-  const res = await apiQuery(GetIntlDocument, {variables: { page, locale, fallbackLocales }})
-  const messages : [IntlMessage] = res.messages
-  const dictionary : {[page:string]: any} = {[page]:{}}
-  messages.forEach(({key, value}) => dictionary[page][key] = value)
-  return dictionary
 }
 
 export const datoError = (err : Error) =>{
