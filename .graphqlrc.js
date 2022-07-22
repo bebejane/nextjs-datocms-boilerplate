@@ -6,7 +6,7 @@ const config =  {
 	pureMagicComment: false,
 	exportFragmentSpreadSubTypes: true,
 	namingConvention: "keep",
-	skipDocumentsValidation: true
+	skipDocumentsValidation: true,
 }
 
 module.exports = {
