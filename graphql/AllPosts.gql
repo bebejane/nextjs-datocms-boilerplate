@@ -1,7 +1,7 @@
 #import "./fragments/ImageFragment.gql"
 #import "./fragments/VideoFragment.gql"
 
-query GetAllPosts{
+query AllPosts{
   allPosts {
     title
     image{

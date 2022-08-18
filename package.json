@@ -4,19 +4,23 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "predev": "yarn codegen",
-    "dev:cache": "DEV_CACHE=true next dev",
+    "dev:watch": "npm run dev & npm run barrel:watch & graphql-codegen --watch",
     "build": "next build",
+    "codegen": "graphql-codegen && node codegen",
     "start": "next start",
     "lint": "next lint",
-    "codegen": "yarn graphql-codegen",
-    "preview": "npm run build && npm run start"
+    "preview": "npm run build && npm run start",
+    "barrel": "node ./lib/scripts/barrel",
+    "barrel:watch": "watch 'node ./lib/scripts/barrel' ./components",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@apollo/client": "^3.6.2",
     "@datocms/cma-client-browser": "^1.0.0",
     "@datocms/cma-client-node": "^1.0.0",
     "@graphql-codegen/typescript-react-apollo": "^3.2.16",
+    "@next/bundle-analyzer": "^12.2.5",
+    "chokidar": "^3.5.3",
     "classnames": "^2.3.1",
     "datocms-client": "^3.5.19",
     "datocms-structured-text-utils": "^2.0.0",
@@ -28,6 +32,7 @@
     "next-compose-plugins": "^2.2.1",
     "next-plugin-graphql": "^0.0.2",
     "next-seo": "^4.28.1",
+    "next-sitemap": "^3.1.20",
     "nextjs-google-analytics": "^1.0.9",
     "react": "^18.1.0",
     "react-datocms": "^3.0.12",
@@ -42,7 +47,7 @@
     "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^2.8.1",
+    "@graphql-codegen/cli": "2.6.2",
     "@graphql-codegen/import-types-preset": "^2.1.20",
     "@graphql-codegen/introspection": "2.1.1",
     "@graphql-codegen/typed-document-node": "^2.2.13",
@@ -56,6 +61,7 @@
     "apollo": "^2.34.0",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.3",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "watch": "^1.0.2"
   }
 }

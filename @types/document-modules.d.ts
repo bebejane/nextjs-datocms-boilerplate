@@ -1,26 +1,26 @@
 
-declare module '*/GetAllPosts.gql' {
+declare module '*/AllPosts.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const GetAllPosts: DocumentNode;
+  export const AllPosts: DocumentNode;
 
   export default defaultDocument;
 }
     
 
-declare module '*/GetGlobal.gql' {
+declare module '*/Global.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const GetGlobal: DocumentNode;
+  export const Global: DocumentNode;
 
   export default defaultDocument;
 }
     
 
-declare module '*/GetSiteSEO.gql' {
+declare module '*/SiteSEO.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const GetSiteSEO: DocumentNode;
+  export const SiteSEO: DocumentNode;
 
   export default defaultDocument;
 }

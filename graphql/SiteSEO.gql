@@ -1,6 +1,6 @@
 #import "./fragments/SiteFragment.graphql"
 
-query GetSiteSEO {
+query SiteSEO {
 	site: _site {
 		...SiteFragment
 	}
