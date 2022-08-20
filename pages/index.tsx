@@ -2,7 +2,7 @@ import styles from './index.module.scss'
 
 import { GetStaticProps } from 'next'
 import { withGlobalProps } from "/lib/hoc";
-import { GetAllPostsDocument } from '/graphql';
+import { AllPostsDocument } from '/graphql';
 //import { useGetGlobalQuery } from '/graphql/hooks';
 
 export type HomeProps = { site:Site, allPosts: PostRecord[]}
@@ -20,9 +20,7 @@ export default function Home({site, allPosts} : HomeProps) {
 	)
 }
 
-export const getStaticProps : GetStaticProps = withGlobalProps({
-	queries:[GetAllPostsDocument]
-}, async ({props, revalidate } : any) => {
+export const getStaticProps : GetStaticProps = withGlobalProps({queries:[AllPostsDocument]}, async ({props, revalidate } : any) => {
 	
 	return {
 		props,

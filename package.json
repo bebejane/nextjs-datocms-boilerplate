@@ -6,7 +6,7 @@
     "dev": "next dev",
     "dev:watch": "npm run dev & npm run barrel:watch & graphql-codegen --watch",
     "build": "next build",
-    "codegen": "graphql-codegen && node codegen",
+    "codegen": "graphql-codegen",
     "start": "next start",
     "lint": "next lint",
     "preview": "npm run build && npm run start",
