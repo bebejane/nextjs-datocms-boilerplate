@@ -1,26 +1,19 @@
 import styles from './index.module.scss'
-
 import { GetStaticProps } from 'next'
-import { withGlobalProps } from "/lib/hoc";
-import { AllPostsDocument } from '/graphql';
-//import { useGetGlobalQuery } from '/graphql/hooks';
+import withGlobalProps from "/lib/withGlobalProps";
 
-export type HomeProps = { site:Site, allPosts: PostRecord[]}
+export type HomeProps = { site:Site }
 
-export default function Home({site, allPosts} : HomeProps) {
+export default function Home({site } : HomeProps) {
 	
 	return (
 		<div className={styles.container}>
-			<ul>
-				{allPosts.map((post, idx) => 
-					<li key={idx}>{post.title}</li>
-				)}
-			</ul>
+			hej
 		</div>
 	)
 }
 
-export const getStaticProps : GetStaticProps = withGlobalProps({queries:[AllPostsDocument]}, async ({props, revalidate } : any) => {
+export const getStaticProps : GetStaticProps = withGlobalProps({queries:[]}, async ({props, revalidate } : any) => {
 	
 	return {
 		props,

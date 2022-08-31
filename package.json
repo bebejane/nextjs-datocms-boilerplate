@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "dev:watch": "npm run dev & npm run barrel:watch & graphql-codegen --watch",
+    "dev": "npm run dev:watch",
+    "dev:watch": "LOG_GRAPHQL=true next dev & npm run barrel:watch & graphql-codegen --watch",
     "build": "next build",
     "codegen": "graphql-codegen",
     "start": "next start",
