@@ -29,9 +29,19 @@ const nextOptions = {
       exclude: /node_modules/,
       loader: 'graphql-tag/loader',
     });
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: ['@svgr/webpack'],
+    })
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: ['@svgr/webpack'],
+    })
     config.resolve.fallback = { fs: false, dns:false, net:false };
     return config;
-  }
+  },
 }
 
 const config = { sassOptions, ...nextOptions }

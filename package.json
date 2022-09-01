@@ -20,6 +20,7 @@
     "@datocms/cma-client-node": "^1.0.0",
     "@graphql-codegen/typescript-react-apollo": "^3.2.16",
     "@next/bundle-analyzer": "^12.2.5",
+    "@svgr/webpack": "^6.3.1",
     "chokidar": "^3.5.3",
     "classnames": "^2.3.1",
     "datocms-client": "^3.5.19",
