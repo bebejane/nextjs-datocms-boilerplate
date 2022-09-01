@@ -16,8 +16,9 @@ const loggingFetch = async (input: RequestInfo, init?: RequestInit): Promise<Res
   
   const operations = init.body ? (JSON.parse(init.body)).map(({operationName})=> operationName) : []
   const requestName = `${operations.join(', ')}`
-  const response = await fetch(input, init)
   const t = new Date().getTime()
+  const response = await fetch(input, init)
+  
   return {
     ...response,
     async text () {
