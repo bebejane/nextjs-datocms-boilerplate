@@ -1,0 +1,7 @@
+#import "./fragments/SiteFragment.graphql"
+
+query SiteSEO {
+	site: _site {
+		...SiteFragment
+	}
+}

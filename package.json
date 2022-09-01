@@ -3,15 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "dev:cache": "DEV_CACHE=true next dev",
+    "dev": "npm run dev:watch",
+    "dev:watch": "LOG_GRAPHQL=true next dev & npm run barrel:watch & graphql-codegen --watch",
     "build": "next build",
+    "codegen": "graphql-codegen",
     "start": "next start",
     "lint": "next lint",
-    "serve": "npm run build && npm run start"
+    "preview": "npm run build && npm run start",
+    "barrel": "node ./lib/scripts/barrel",
+    "barrel:watch": "watch 'node ./lib/scripts/barrel' ./components",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@apollo/client": "^3.6.2",
+    "@datocms/cma-client-browser": "^1.0.0",
+    "@datocms/cma-client-node": "^1.0.0",
+    "@graphql-codegen/typescript-react-apollo": "^3.2.16",
+    "@next/bundle-analyzer": "^12.2.5",
+    "chokidar": "^3.5.3",
     "classnames": "^2.3.1",
     "datocms-client": "^3.5.19",
     "datocms-structured-text-utils": "^2.0.0",
@@ -19,10 +28,11 @@
     "graphql": "^16.4.0",
     "graphql-tag": "^2.12.6",
     "markdown-truncate": "^1.0.4",
-    "next": "^12.1.6",
+    "next": "^12.2.2",
     "next-compose-plugins": "^2.2.1",
     "next-plugin-graphql": "^0.0.2",
     "next-seo": "^4.28.1",
+    "next-sitemap": "^3.1.20",
     "nextjs-google-analytics": "^1.0.9",
     "react": "^18.1.0",
     "react-datocms": "^3.0.12",
@@ -32,10 +42,26 @@
     "remark-breaks": "^3.0.2",
     "remark-gfm": "^3.0.1",
     "rooks": "^5.8.0",
-    "sass": "^1.43.5"
+    "sass": "^1.43.5",
+    "swiper": "^8.2.3",
+    "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/import-types-preset": "^2.1.20",
+    "@graphql-codegen/introspection": "2.1.1",
+    "@graphql-codegen/typed-document-node": "^2.2.13",
+    "@graphql-codegen/typescript": "2.5.1",
+    "@graphql-codegen/typescript-document-nodes": "2.2.13",
+    "@graphql-codegen/typescript-graphql-files-modules": "^2.1.1",
+    "@graphql-codegen/typescript-operations": "2.4.2",
+    "@graphql-codegen/typescript-resolvers": "^2.6.6",
+    "@types/graphql": "^14.5.0",
+    "@types/react": "^18.0.14",
+    "apollo": "^2.34.0",
     "eslint": "7.32.0",
-    "eslint-config-next": "12.0.3"
+    "eslint-config-next": "12.0.3",
+    "typescript": "^4.7.4",
+    "watch": "^1.0.2"
   }
 }
