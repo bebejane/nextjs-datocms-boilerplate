@@ -20,9 +20,10 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "/*": [
-        "*"
-      ]
+      "components/*": ["/components"],
+      "graphql/*": ["/graphql"],
+      "lib/*": ["/lib"],
+      "/*": ["*"]
     }
   },
   "typeRoots": ["./@types"],
