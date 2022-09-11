@@ -6,6 +6,7 @@ import { TypedDocumentNode, gql } from '@apollo/client';
 export type IntlMessage = { key:string, value:string }
 
 export const GRAPHQL_API_ENDPOINT = `https://graphql.datocms.com`;
+export const GRAPHQL_PREVIEW_API_ENDPOINT = `https://graphql.datocms.com/preview`;
 export const GRAPHQL_API_TOKEN = (isServer ? process.env.GRAPHQL_API_TOKEN : process.env.NEXT_PUBLIC_GRAPHQL_API_TOKEN) || null
 
 const loggingFetch = async (input: RequestInfo, init?: RequestInit): Promise<Response>  => {
@@ -25,27 +26,18 @@ const loggingFetch = async (input: RequestInfo, init?: RequestInit): Promise<Res
   }
 }
 
-const link = new BatchHttpLink({ 
+const linkConfig = {
   uri: GRAPHQL_API_ENDPOINT,
   fetch: process.env.LOG_GRAPHQL ? loggingFetch : undefined,
   batchMax: 10, 
   batchInterval: 50,
   headers: { 
-    'Authorization': `Bearer ${GRAPHQL_API_TOKEN}`,
-    'X-Include-Drafts': false
+    'Authorization': `Bearer ${GRAPHQL_API_TOKEN}`
   }
-})
+}
 
-const previewLink = new BatchHttpLink({ 
-  uri: GRAPHQL_API_ENDPOINT,
-  fetch: process.env.LOG_GRAPHQL ? loggingFetch : undefined,
-  batchMax: 10, 
-  batchInterval: 50,
-  headers: { 
-    'Authorization': `Bearer ${GRAPHQL_API_TOKEN}`,
-    'X-Include-Drafts': true
-  }
-})
+const link = new BatchHttpLink(linkConfig)
+const previewLink = new BatchHttpLink({...linkConfig, headers:{...linkConfig.headers, 'X-Include-Drafts': true}})
 
 export const client = new ApolloClient({
   link,
@@ -82,7 +74,7 @@ export const apiQuery = async (query: TypedDocumentNode | TypedDocumentNode[], o
   
     const data = await Promise.all(batch)
     const errors = data.filter(({errors}) => errors).map(({errors})=> errors?.reduce((curr, acc) => curr + '. ' + acc.message, ''))
-
+    
     if(errors.length)
       throw new Error(errors.join('. '))
     
@@ -96,18 +88,8 @@ export const apiQuery = async (query: TypedDocumentNode | TypedDocumentNode[], o
 }
 
 export const SEOQuery = (schema: string) : TypedDocumentNode => {
-  return gql`
-    query GetSEO {
-      seo: ${schema} {
-        id
-        tags: _seoMetaTags {
-          attributes
-          content
-          tag
-        }
-      }
-    }
-  ` as TypedDocumentNode
+  const q = "query GetSEO {seo: " + schema + " {id tags: _seoMetaTags {attributes content tag}}}";
+  return gql(q) as TypedDocumentNode
 }
 
 

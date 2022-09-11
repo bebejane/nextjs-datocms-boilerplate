@@ -1,31 +1,4 @@
 
-declare module '*/AllPosts.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const AllPosts: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/Global.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const Global: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/SiteSEO.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const SiteSEO: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
 declare module '*/ImageFragment.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -57,6 +30,33 @@ declare module '*/VideoFragment.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const VideoFragment: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/global.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const Global: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/posts.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const AllPosts: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/seo.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const Site: DocumentNode;
 
   export default defaultDocument;
 }
