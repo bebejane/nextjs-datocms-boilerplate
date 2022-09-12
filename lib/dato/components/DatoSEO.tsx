@@ -1,6 +1,6 @@
 import { NextSeo, DefaultSeo } from 'next-seo';
 
-const DatoSEO = ({seo = {}, site = {}, pathname, title, subtitle, description} : any) => {
+const DatoSEO = ({seo = {}, site = {}, pathname, title, subtitle, description, noindex = false} : any) => {
   
   const meta = parseDatoMetaTags({seo, site, pathname}) 
   const { globalSeo, favicon } = site
@@ -35,7 +35,9 @@ const DatoSEO = ({seo = {}, site = {}, pathname, title, subtitle, description} :
         site_name:meta["og:site_name"],
       }}
       twitter={ twitterProps }
-      additionalLinkTags={favicons} 
+      additionalLinkTags={favicons}
+      noindex={noindex}
+      nofollow={noindex}
     />
   )
 }

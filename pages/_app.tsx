@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps } : AppProps) {
   return (
     <>
       <GoogleAnalytics />
-      <DatoSEO seo={seo} site={site} pathname={pathname} key={pathname}/>
+      <DatoSEO seo={seo} site={site} pathname={pathname} key={pathname} noindex={true}/>
       <Component {...pageProps} />
     </>
   )
