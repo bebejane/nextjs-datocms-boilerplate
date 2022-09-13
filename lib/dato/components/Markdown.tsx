@@ -5,10 +5,10 @@ import truncateMarkdown  from 'markdown-truncate'
 import remarkBreaks from 'remark-breaks'
 import type { UrlObject } from 'url';
 
-type MarkdownProps = {children: string, truncate?: boolean}
+type MarkdownProps = {children?: string, truncate?: number, className?:string}
 type AnchorProp = {children:[any], href: UrlObject }
 
-const Markdown = ({ children , truncate } : MarkdownProps) => {
+const Markdown = ({ children , truncate, className } : MarkdownProps) => {
   if(!children) return null
 
   const content = !truncate ? children : truncateMarkdown(children, {limit:truncate, ellipsis:true})
@@ -16,15 +16,16 @@ const Markdown = ({ children , truncate } : MarkdownProps) => {
   return (
     <ReactMarkdown 
       remarkPlugins={[gfm, remarkBreaks]} 
+      className={className}
       // eslint-disable-next-line react/no-children-prop
       children={content}
       components={{
         // @ts-ignore
         a: ({ children, href } : AnchorProp) => 
           <Link 
+            scroll={false} 
             href={href} 
             prefetch={false}
-            scroll={false}
           >
             <a>{children[0]}</a>
           </Link>
