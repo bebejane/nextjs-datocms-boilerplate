@@ -9,7 +9,6 @@ fragment ImageFragment on FileField {
   title
   url
   width
-  customData
   responsiveImage {
     alt
     aspectRatio
@@ -30,6 +29,6 @@ fragment ImageFragment on FileField {
     mp4med: mp4Url(res: medium)
     mp4low: mp4Url(res: low)
     framerate
-    duration 
+    duration
   }
 }
