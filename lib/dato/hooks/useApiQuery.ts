@@ -1,6 +1,6 @@
 import { TypedDocumentNode } from '@apollo/client';
 import { useEffect, useState, useCallback } from "react";
-import { apiQuery} from '../api';
+import { apiQuery } from '../api';
 
 export type UseApiQueryProps = {
   variables?: any,
@@ -70,7 +70,10 @@ const useApiQuery = <T>(document : TypedDocumentNode, {variables, initialData, p
 	useEffect(()=>{
     if(!initialData)
       load()
-  }, [initialData, load])	
+    else if(initialData.pagination?.count <= pageSize)
+      setPage((page)=>({...page, end:true}))
+
+  }, [initialData, load, setPage, pageSize])
 
   return {data, error, loading, loadMore, nextPage,  page}
 };
