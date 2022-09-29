@@ -12,8 +12,8 @@ export default function withGlobalProps(opt: any , callback : Function) : GetSta
     queries.push(opt.query)
   if(opt.queries) 
     queries.push.apply(queries, opt.queries)
-  if(opt.model) 
-    queries.push(SEOQuery(opt.model))
+  if(opt.seo) 
+    queries.push(SEOQuery(opt.seo))
   
   return async (context) => {
     const props = await apiQuery(queries, {preview:context.preview});
