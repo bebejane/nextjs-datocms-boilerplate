@@ -3,5 +3,5 @@
 query Global {
   site: _site {
 		...SiteFragment
-	} 
+	}
 }
