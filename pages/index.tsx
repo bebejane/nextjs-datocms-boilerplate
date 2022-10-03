@@ -1,10 +1,10 @@
 import styles from './index.module.scss'
-import { GetStaticProps } from 'next'
-import { AllPostsDocument } from '/graphql';
 import withGlobalProps from "/lib/withGlobalProps";
+import { AllPostsDocument } from '/graphql';
 import Markdown from '/lib/dato/components/Markdown';
 import React from 'react';
 import { apiQuery } from '/lib/dato/api';
+import type { GetStaticProps, GetServerSideProps } from 'next'
 
 export type HomeProps = { site:Site , allPosts: PostRecord[]}
 
