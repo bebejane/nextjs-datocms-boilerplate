@@ -1,0 +1,12 @@
+#import "./fragments/ImageFragment.graphql"
+
+query AllPosts {
+  allPosts{
+    id
+    title
+    image {
+      ...ImageFragment
+    }
+    content(markdown: false)
+  }
+}

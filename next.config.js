@@ -23,7 +23,7 @@ const nextOptions = {
   experimental: {
     scrollRestoration: true
   },
-  webpack: (config) => {
+  webpack: (config, ctx) => {
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
       exclude: /node_modules/,
@@ -34,7 +34,18 @@ const nextOptions = {
       issuer: /\.[jt]sx?$/,
       use: ['@svgr/webpack'],
     })
+    
     config.resolve.fallback = { fs: false, dns:false, net:false };
+    
+    if (ctx.nextRuntime === "edge") {
+      if (!config.resolve.conditionNames) {
+        config.resolve.conditionNames = ['require', 'node'];
+      }
+      if (!config.resolve.conditionNames.includes("worker")) {
+        config.resolve.conditionNames.push("worker");
+      } 
+    }
+    
     return config;
   },
 }
