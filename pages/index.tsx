@@ -1,48 +1,21 @@
 import styles from './index.module.scss'
 import withGlobalProps from "/lib/withGlobalProps";
-import { AllPostsDocument } from '/graphql';
-import Markdown from '/lib/dato/components/Markdown';
-import React from 'react';
-import { apiQuery } from '/lib/dato/api';
-import type { GetStaticProps, GetServerSideProps } from 'next'
+import type { GetStaticProps } from 'next'
 
-export type HomeProps = { site:Site , allPosts: PostRecord[]}
+export type HomeProps = { site:Site }
 
-export default function Home({site, allPosts } : HomeProps) {
+export default function Home({site } : HomeProps) {
 	return (
 		<div className={styles.container}>
-			{allPosts.map(({title, content}, key)=>
-				<React.Fragment key={key}>
-					<h1>{title}</h1>
-					<Markdown>{content}</Markdown>
-				</React.Fragment>
-			)}
+			hej {site?.globalSeo.siteName}
 		</div>
 	)
 }
 
-export const config = { 
-	runtime:'experimental-edge'
-
-}
-
-
-export const getServerSideProps = async function(){
-
-	const props = await apiQuery(AllPostsDocument, {})
-
-	return {
-		props
-	};
-};
-
-/*
-export const getStaticProps : GetStaticProps = withGlobalProps({queries:[AllPostsDocument]}, async ({props, revalidate } : any) => {
+export const getStaticProps : GetStaticProps = withGlobalProps({queries:[]}, async ({props, revalidate } : any) => {
 	
 	return {
 		props,
 		revalidate
 	};
 });
-
-*/
