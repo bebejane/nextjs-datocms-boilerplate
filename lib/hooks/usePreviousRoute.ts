@@ -1,21 +1,29 @@
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const usePreviousRoute = () : string => {
+const usePreviousRoute = () => {
   
   const storage = globalThis.sessionStorage
   const router = useRouter()
-  const [prevRoute, setPrevRoute] = useState<string>(typeof storage !== 'undefined' ? storage.getItem('previousRoute') : null)
+  const [prevRoute, setPrevRoute] = useState(typeof storage !== 'undefined' ? storage.getItem('previousRoute') : null)
 
 	useEffect(()=>{
-    
     const prevRoute = storage.getItem('currentRoute');
     if (prevRoute === router.asPath) return
-    //console.log(prevRoute, '>', router.asPath, )
     storage.setItem('previousRoute', prevRoute)
     storage.setItem("currentRoute", router.asPath);
     setPrevRoute(prevRoute)
 	}, [router.asPath])	
+
+  useEffect(()=>{
+    const handleWindowReload = (e) => {
+      storage.removeItem('previousRoute')
+      storage.removeItem("currentRoute")
+    }
+    window.addEventListener('beforeunload', handleWindowReload)
+    return () => window.removeEventListener('beforeunload', handleWindowReload)
+  })
+
 
   return prevRoute
 };
