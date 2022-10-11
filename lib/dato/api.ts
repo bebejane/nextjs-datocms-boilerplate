@@ -7,7 +7,7 @@ export type ApiQueryOptions = { variables?: any | any[], preview?: boolean}
 
 const isServer = typeof window === 'undefined';
 const GRAPHQL_API_ENDPOINT = process.env.GRAPHQL_API_ENDPOINT || process.env.NEXT_PUBLIC_GRAPHQL_API_ENDPOINT || `https://graphql.datocms.com`;
-const GRAPHQL_API_TOKEN = (isServer ? process.env.GRAPHQL_API_TOKEN : process.env.NEXT_PUBLIC_GRAPHQL_API_TOKEN) || null
+const GRAPHQL_API_TOKEN = process.env.NEXT_PUBLIC_GRAPHQL_API_TOKEN
 
 export const apiQuery = async (query: TypedDocumentNode | TypedDocumentNode[], options? : ApiQueryOptions) : Promise<any> => {
   
@@ -46,7 +46,8 @@ export const apiQuery = async (query: TypedDocumentNode | TypedDocumentNode[], o
 
 const loggingFetch = async (input: RequestInfo, init?: RequestInit): Promise<Response>  => {
   
-  const operations = init !== undefined  && init.body ? (JSON.parse(init.body.toString())).map((op : {operationName:string}) => op.operationName) : []
+  const queries = init ? JSON.parse(init.body.toString()) : undefined;
+  const operations = queries ? Array.isArray(queries) ? queries.map((op : {operationName:string}) => op.operationName) : [queries.operationName] : [];
   const requestName = `${operations.join(', ')}`
   const response = await fetch(input, init)
   const t = new Date().getTime()

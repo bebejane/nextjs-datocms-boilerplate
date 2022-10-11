@@ -13,7 +13,7 @@ module.exports = {
 	schema: {
 		"https://graphql.datocms.com": {
 			headers: {
-				Authorization: process.env.GRAPHQL_API_TOKEN,
+				Authorization: process.env.NEXT_PUBLIC_GRAPHQL_API_TOKEN,
 				"X-Exclude-Invalid": true,
 			},
 		},
@@ -38,12 +38,6 @@ module.exports = {
           plugins: ["typescript-graphql-files-modules"],
 					config
         },
-				/*
-				"graphql/hooks.ts": {
-          plugins: ["typescript-react-apollo"],
-					config:{...config, withHooks:true}
-        },
-				*/
 			},
 		}
 	},
