@@ -13,7 +13,7 @@ const usePreviousRoute = () => {
     storage.setItem('previousRoute', prevRoute)
     storage.setItem("currentRoute", router.asPath);
     setPrevRoute(prevRoute)
-	}, [router.asPath])	
+	}, [router.asPath, storage])	
 
   useEffect(()=>{
     const handleWindowReload = (e) => {
