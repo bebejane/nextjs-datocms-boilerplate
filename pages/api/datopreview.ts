@@ -1,6 +1,7 @@
 // Put this code in the following path of your Next.js website:
 // /pages/api/preview/links.js
 
+
 // this "routing" function knows how to convert a DatoCMS record
 // into canonical URL within the website
 
