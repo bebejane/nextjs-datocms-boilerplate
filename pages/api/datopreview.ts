@@ -12,7 +12,7 @@ const generatePreviewLink = ({ item, itemType, locale }) => {
     case "post":
       return {
         label: `${item.title}`,
-        url: `${ process.env.NEXT_PUBLIC_SITE_URL}/posts/${item.slug}`,
+        url: `/posts/${item.slug}`,
       };
     default:
       return null;
@@ -31,6 +31,8 @@ const handler = (req, res) => {
     return res.status(200).send("ok");
   }
 
+  console.log(req.body);
+  
   const previewLink = generatePreviewLink(req.body);
 
   if (!previewLink) {
@@ -41,7 +43,7 @@ const handler = (req, res) => {
     previewLink,
     {
       label: `${previewLink.label} - Preview`,
-      url: `${ process.env.NEXT_PUBLIC_SITE_URL}/api/preview/?slug=${previewLink.url}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/api/preview/?slug=${previewLink.url}`,
     },
   ];
 
