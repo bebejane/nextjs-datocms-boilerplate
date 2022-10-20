@@ -11,8 +11,8 @@ const generatePreviewLink = ({ item, itemType, locale }) => {
   switch (itemType.attributes.api_key) {
     case "post":
       return {
-        label: `${item.title}`,
-        url: `/posts/${item.slug}`,
+        label: `${item.attributes.title}`,
+        url: `/posts/${item.attributes.slug}`,
       };
     default:
       return null;
