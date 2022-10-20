@@ -57,6 +57,7 @@ declare module '*/post.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const AllPosts: DocumentNode;
+export const Post: DocumentNode;
 
   export default defaultDocument;
 }

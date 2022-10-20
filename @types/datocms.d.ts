@@ -16,6 +16,7 @@ type Scalars = {
   FloatType: any;
   IntType: any;
   ItemId: any;
+  JsonField: any;
   MetaTagAttributes: any;
   UploadId: any;
 };
@@ -1787,6 +1788,7 @@ type PostModelFilter = {
   id?: InputMaybe<ItemIdFilter>;
   image?: InputMaybe<FileFilter>;
   slug?: InputMaybe<SlugFilter>;
+  structuredContent?: InputMaybe<StructuredTextFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
   video?: InputMaybe<FileFilter>;
@@ -1821,6 +1823,13 @@ enum PostModelOrderBy {
   updatedAt_DESC = 'updatedAt_DESC'
 }
 
+type PostModelStructuredContentField = {
+  __typename?: 'PostModelStructuredContentField';
+  blocks: Array<Scalars['String']>;
+  links: Array<Scalars['String']>;
+  value: Scalars['JsonField'];
+};
+
 /** Record of type Post (post) */
 type PostRecord = RecordInterface & {
   __typename?: 'PostRecord';
@@ -1841,6 +1850,7 @@ type PostRecord = RecordInterface & {
   id: Scalars['ItemId'];
   image: FileField;
   slug: Scalars['String'];
+  structuredContent?: Maybe<PostModelStructuredContentField>;
   title: Scalars['String'];
   updatedAt: Scalars['DateTime'];
   video?: Maybe<VideoFileField>;
@@ -2124,6 +2134,18 @@ type StringMatchesFilter = {
   caseSensitive?: InputMaybe<Scalars['BooleanType']>;
   pattern: Scalars['String'];
   regexp?: InputMaybe<Scalars['BooleanType']>;
+};
+
+/** Specifies how to filter Structured Text fields */
+type StructuredTextFilter = {
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']>;
+  /** Filter records with the specified field set as blank (null or single empty paragraph) */
+  isBlank?: InputMaybe<Scalars['BooleanType']>;
+  /** Filter records based on a regular expression */
+  matches?: InputMaybe<StringMatchesFilter>;
+  /** Exclude records based on a regular expression */
+  notMatches?: InputMaybe<StringMatchesFilter>;
 };
 
 type Tag = {
@@ -2610,7 +2632,14 @@ type GlobalQuery = { __typename?: 'Query', site: { __typename?: 'Site', favicon:
 type AllPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type AllPostsQuery = { __typename?: 'Query', allPosts: Array<{ __typename?: 'PostRecord', id: any, title: string, content?: string | null, image: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null, video?: { __typename?: 'UploadVideoField', thumbnailUrl: string, streamingUrl: string, framerate?: number | null, duration?: number | null, mp4high?: string | null, mp4med?: string | null, mp4low?: string | null } | null } }> };
+type AllPostsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'PostRecord', id: any, title: string, slug: string, content?: string | null, image: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null, video?: { __typename?: 'UploadVideoField', thumbnailUrl: string, streamingUrl: string, framerate?: number | null, duration?: number | null, mp4high?: string | null, mp4med?: string | null, mp4low?: string | null } | null } }> };
+
+type PostQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars['String']>;
+}>;
+
+
+type PostQuery = { __typename?: 'Query', post?: { __typename?: 'PostRecord', id: any, slug: string, title: string, content?: string | null, image: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null, video?: { __typename?: 'UploadVideoField', thumbnailUrl: string, streamingUrl: string, framerate?: number | null, duration?: number | null, mp4high?: string | null, mp4med?: string | null, mp4low?: string | null } | null }, structuredContent?: { __typename?: 'PostModelStructuredContentField', blocks: Array<string> } | null } | null };
 
 type SiteQueryVariables = Exact<{ [key: string]: never; }>;
 
