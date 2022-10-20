@@ -3,6 +3,7 @@
 
 // this "routing" function knows how to convert a DatoCMS record
 // into canonical URL within the website
+
 const generatePreviewLink = ({ item, itemType, locale }) => {
   const localePrefix = locale === "en" ? "" : `/${locale}`;
 
