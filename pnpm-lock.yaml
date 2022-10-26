@@ -21,7 +21,7 @@ specifiers:
   '@types/react': ^18.0.21
   apollo: ^2.34.0
   classnames: ^2.3.2
-  dato-nextjs-utils: https://github.com/bebejane/dato-nextjs-utils
+  dato-nextjs-utils: github:bebejane/dato-nextjs-utils
   datocms-structured-text-utils: ^2.0.4
   eslint: ^8.25.0
   eslint-config-next: ^12.3.1
@@ -57,7 +57,7 @@ dependencies:
   '@svgr/webpack': 6.5.0
   '@types/node': 18.11.3
   classnames: 2.3.2
-  dato-nextjs-utils: github.com/bebejane/dato-nextjs-utils/69034aa8d5951882cc375b2d4f1af9b0e4c72b2b_i7qmymys7jbmf6z4d3oaqvegnm
+  dato-nextjs-utils: github.com/bebejane/dato-nextjs-utils/a52b487f905b7499146b557f9394495eccf78574_i7qmymys7jbmf6z4d3oaqvegnm
   datocms-structured-text-utils: 2.0.4
   framer-motion: 7.6.1_biqbaboplfbrettd7655fr4n2y
   graphql: 16.6.0
@@ -8492,7 +8492,6 @@ packages:
     resolution: {integrity: sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: true
 
   /ua-parser-js/0.7.32:
     resolution: {integrity: sha512-f9BESNVhzlhEFf2CHMSj40NWOjYPl1YKYbrvIr/hFTDEmLq7SRbWvm7FcdcpCYT95zrOhC7gZSxjdnnTpBcwVw==}
@@ -9015,11 +9014,11 @@ packages:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: false
 
-  github.com/bebejane/dato-nextjs-utils/69034aa8d5951882cc375b2d4f1af9b0e4c72b2b_i7qmymys7jbmf6z4d3oaqvegnm:
-    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/69034aa8d5951882cc375b2d4f1af9b0e4c72b2b}
-    id: github.com/bebejane/dato-nextjs-utils/69034aa8d5951882cc375b2d4f1af9b0e4c72b2b
+  github.com/bebejane/dato-nextjs-utils/a52b487f905b7499146b557f9394495eccf78574_i7qmymys7jbmf6z4d3oaqvegnm:
+    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/a52b487f905b7499146b557f9394495eccf78574}
+    id: github.com/bebejane/dato-nextjs-utils/a52b487f905b7499146b557f9394495eccf78574
     name: dato-nextjs-utils
-    version: 1.0.2
+    version: 1.0.3
     engines: {node: '>=0.11'}
     dependencies:
       '@apollo/client': 3.7.0_gdcq4dv6opitr3wbfwyjmanyra
@@ -9033,6 +9032,7 @@ packages:
       react-markdown: 8.0.3_iapumuv4e6jcjznwuxpf4tt22e
       remark-breaks: 3.0.2
       remark-gfm: 3.0.1
+      typescript: 4.8.4
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/react'
