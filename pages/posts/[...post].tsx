@@ -1,19 +1,22 @@
 import styles from './[...post].module.scss'
-import withGlobalProps from "/lib/withGlobalProps";
+import { withGlobalProps } from 'dato-nextjs-utils/hoc';
+import { apiQuery } from 'dato-nextjs-utils/api';
+import { DatoMarkdown } from 'dato-nextjs-utils/components';
 import type { GetStaticProps } from 'next'
 import { PostDocument, AllPostsDocument } from '/graphql';
-import { apiQuery } from '/lib/dato/api';
-import { StructuredText, Image} from 'react-datocms'
-import Markdown from '/lib/dato/components/Markdown';
+import { Image } from 'react-datocms'
 export type PostProps = { post: PostRecord }
 
 export default function Post({ post } : PostProps) {
+	
 	return (
 		<div className={styles.container}>
 			<h1>{post.title}</h1>
-			<Markdown>
-				{post.content}
-			</Markdown>
+			{post.content && 
+				<DatoMarkdown>
+					{post.content}
+				</DatoMarkdown>
+			}
 			{post.image && <Image data={post.image.responsiveImage}/>}
 		</div>
 	)

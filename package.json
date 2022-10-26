@@ -15,7 +15,7 @@
     "postbuild": "next-sitemap"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.0",
+    "@apollo/client": "^3.7.1",
     "@datocms/cma-client-browser": "^1.1.5",
     "@datocms/cma-client-node": "^1.1.5",
     "@graphql-codegen/typescript-react-apollo": "^3.3.3",
@@ -32,7 +32,7 @@
     "markdown-truncate": "^1.0.4",
     "next": "^12.3.1",
     "next-compose-plugins": "^2.2.1",
-    "next-seo": "^5.5.0",
+    "next-seo": "^5.8.0",
     "next-sitemap": "^3.1.24",
     "nextjs-google-analytics": "^2.1.0",
     "react": "^18.2.0",
