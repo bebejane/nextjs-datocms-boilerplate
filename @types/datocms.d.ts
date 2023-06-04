@@ -2949,6 +2949,7 @@ type UserModelFilter = {
   email?: InputMaybe<StringFilter>;
   id?: InputMaybe<ItemIdFilter>;
   name?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<SlugFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
 };
 
@@ -3001,6 +3002,7 @@ type UserRecord = RecordInterface & {
   email: Scalars['String'];
   id: Scalars['ItemId'];
   name?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
 };
 
@@ -3130,3 +3132,15 @@ type SiteQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type SiteQuery = { __typename?: 'Query', site: { __typename?: 'Site', favicon: Array<{ __typename?: 'Tag', attributes?: any | null, content?: string | null, tag: string }>, globalSeo?: { __typename?: 'GlobalSeoField', facebookPageUrl?: string | null, siteName?: string | null, titleSuffix?: string | null, twitterAccount?: string | null, fallbackSeo?: { __typename?: 'SeoField', description?: string | null, title?: string | null, twitterCard?: string | null, image?: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null, video?: { __typename?: 'UploadVideoField', thumbnailUrl: string, streamingUrl: string, framerate?: number | null, duration?: number | null, mp4high?: string | null, mp4med?: string | null, mp4low?: string | null } | null } | null } | null } | null } };
+
+type AllUsersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AllUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'UserRecord', id: any, name?: string | null, email: string, slug?: string | null }> };
+
+type UserQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+type UserQuery = { __typename?: 'Query', user?: { __typename?: 'UserRecord', id: any, name?: string | null, email: string, slug?: string | null } | null };

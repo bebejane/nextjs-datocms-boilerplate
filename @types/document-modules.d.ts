@@ -71,3 +71,13 @@ declare module '*/seo.gql' {
   export default defaultDocument;
 }
     
+
+declare module '*/user.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const AllUsers: DocumentNode;
+export const User: DocumentNode;
+
+  export default defaultDocument;
+}
+    

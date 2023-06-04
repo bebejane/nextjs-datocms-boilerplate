@@ -1,0 +1,17 @@
+query AllUsers {
+	users: allUsers {
+		id
+		name
+		email
+		slug
+	}
+}
+
+query User($slug: String!) {
+	user(filter: { slug: { eq: $slug } }) {
+		id
+		name
+		email
+		slug
+	}
+}
