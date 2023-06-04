@@ -10,6 +10,9 @@ export default withRevalidate(async (record, revalidate) => {
     case 'post':
       paths.push(`/posts/${slug}`)
       break;
+    case 'user':
+      paths.push(`/users/${slug}`)
+      break;
     default:
       break;
   }
