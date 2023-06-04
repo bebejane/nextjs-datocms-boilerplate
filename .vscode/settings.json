@@ -4,7 +4,8 @@
     "node_modules": true,
     ".next": true,
     ".vscode": true,
-    "@types": true
+    "@types": true,
+    ".vercel": true
   },
   "workspace.isHidden": true,
   "dotenv.enableAutocloaking": false
