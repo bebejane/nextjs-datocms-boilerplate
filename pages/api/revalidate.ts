@@ -1,13 +1,14 @@
 import { withRevalidate } from 'dato-nextjs-utils/hoc'
 
 export default withRevalidate(async (record, revalidate) => {
-    
+
   const { api_key: apiKey } = record.model;
+  const { slug } = record
   const paths = []
 
   switch (apiKey) {
-    case 'start':
-      paths.push(`/`)
+    case 'post':
+      paths.push(`/posts/${slug}`)
       break;
     default:
       break;
