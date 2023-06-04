@@ -14,7 +14,7 @@ export default withWebPreviewsEdge(async ({ item, itemType, locale }) => {
     case 'post':
       path = `/posts/${slug}`
       break;
-    case 'users':
+    case 'user':
       path = `/users/${slug}`
       break;
     default:
