@@ -6,5 +6,6 @@
     ".vscode": true,
     "@types": true
   },
-  "workspace.isHidden": true
+  "workspace.isHidden": true,
+  "dotenv.enableAutocloaking": false
 }

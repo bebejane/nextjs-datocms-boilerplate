@@ -6,7 +6,7 @@ import { AllPostsDocument } from '/graphql';
 import Link from 'next/link';
 export type HomeProps = { site: Site, posts: PostRecord[] }
 
-export default function Home({ site, posts }: HomeProps) {
+export default function Home({ posts }: HomeProps) {
 
 	const { scrolledPosition } = useScrollInfo()
 
