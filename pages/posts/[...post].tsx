@@ -7,17 +7,17 @@ import { PostDocument, AllPostsDocument } from '/graphql';
 import { Image } from 'react-datocms'
 export type PostProps = { post: PostRecord }
 
-export default function Post({ post } : PostProps) {
-	
+export default function Post({ post }: PostProps) {
+
 	return (
 		<div className={styles.container}>
 			<h1>{post.title}</h1>
-			{post.content && 
+			{post.content &&
 				<DatoMarkdown>
 					{post.content}
 				</DatoMarkdown>
 			}
-			{post.image && <Image data={post.image.responsiveImage}/>}
+			{post.image && <Image data={post.image.responsiveImage} />}
 		</div>
 	)
 }
@@ -32,11 +32,14 @@ export async function getStaticPaths(context) {
 }
 
 
-export const getStaticProps : GetStaticProps = withGlobalProps({queries:[]}, async ({props, revalidate, context } : any) => {
+export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 	const { post } = await apiQuery(PostDocument, { variables: { slug: context.params.post[0] } })
-	
+
+	if (!post)
+		return { notFound: true }
+
 	return {
-		props:{
+		props: {
 			...props,
 			post
 		},
