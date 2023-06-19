@@ -9,7 +9,7 @@
 			"schedule": "*/3 * * * *"
 		},
 		{
-			"path": "/api/backup",
+			"path": "/api/backup?max=3",
 			"schedule": "*/3 * * * *"
 		}
 	]

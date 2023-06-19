@@ -2047,6 +2047,7 @@ type PostModelFilter = {
   structuredContent?: InputMaybe<StructuredTextFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
+  user?: InputMaybe<LinkFilter>;
   video?: InputMaybe<FileFilter>;
 };
 
@@ -2113,6 +2114,7 @@ type PostRecord = RecordInterface & {
   structuredContent?: Maybe<PostModelStructuredContentField>;
   title?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
+  user?: Maybe<UserRecord>;
   video?: Maybe<VideoFileField>;
 };
 
@@ -2953,6 +2955,7 @@ type UserModelFilter = {
   email?: InputMaybe<StringFilter>;
   id?: InputMaybe<ItemIdFilter>;
   name?: InputMaybe<StringFilter>;
+  post?: InputMaybe<LinkFilter>;
   slug?: InputMaybe<SlugFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
 };
@@ -3006,6 +3009,7 @@ type UserRecord = RecordInterface & {
   email: Scalars['String'];
   id: Scalars['ItemId'];
   name?: Maybe<Scalars['String']>;
+  post?: Maybe<PostRecord>;
   slug?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
 };
