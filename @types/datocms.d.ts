@@ -1699,12 +1699,6 @@ enum ItemStatus {
   updated = 'updated'
 }
 
-/** Specifies how to filter JSON fields */
-type JsonFilter = {
-  /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
-};
-
 /** Specifies how to filter Single-link fields */
 type LinkFilter = {
   /** Search for records with an exact match. The specified value must be a Record ID */
@@ -2043,7 +2037,6 @@ type PostModelFilter = {
   image?: InputMaybe<FileFilter>;
   person?: InputMaybe<LinkFilter>;
   slug?: InputMaybe<SlugFilter>;
-  socialImage?: InputMaybe<JsonFilter>;
   structuredContent?: InputMaybe<StructuredTextFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
@@ -2090,6 +2083,7 @@ type PostModelStructuredContentField = {
 /** Record of type Post (post) */
 type PostRecord = RecordInterface & {
   __typename?: 'PostRecord';
+  _allTitleLocales?: Maybe<Array<StringNonNullMultiLocaleField>>;
   _createdAt: Scalars['DateTime'];
   /** Editing URL */
   _editingUrl?: Maybe<Scalars['String']>;
@@ -2110,12 +2104,17 @@ type PostRecord = RecordInterface & {
   image?: Maybe<FileField>;
   person?: Maybe<PersonRecord>;
   slug: Scalars['String'];
-  socialImage?: Maybe<Scalars['JsonField']>;
   structuredContent?: Maybe<PostModelStructuredContentField>;
-  title?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
   updatedAt: Scalars['DateTime'];
   user?: Maybe<UserRecord>;
   video?: Maybe<VideoFileField>;
+};
+
+
+/** Record of type Post (post) */
+type PostRecord_allTitleLocalesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
 };
 
 
@@ -2128,6 +2127,13 @@ type PostRecord_seoMetaTagsArgs = {
 /** Record of type Post (post) */
 type PostRecordcontentArgs = {
   markdown?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+/** Record of type Post (post) */
+type PostRecordtitleArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
 };
 
 /** Specifies how to filter by publication datetime */
@@ -2196,7 +2202,6 @@ type Query = {
 
 /** The query root for this schema */
 type Query_allLinksMetaArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<LinkModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
@@ -2204,7 +2209,6 @@ type Query_allLinksMetaArgs = {
 
 /** The query root for this schema */
 type Query_allMenusMetaArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<MenuModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
@@ -2212,7 +2216,6 @@ type Query_allMenusMetaArgs = {
 
 /** The query root for this schema */
 type Query_allPeopleMetaArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<PersonModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
@@ -2220,7 +2223,6 @@ type Query_allPeopleMetaArgs = {
 
 /** The query root for this schema */
 type Query_allPostsMetaArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<PostModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
@@ -2235,7 +2237,6 @@ type Query_allUploadsMetaArgs = {
 
 /** The query root for this schema */
 type Query_allUsersMetaArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<UserModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
@@ -2458,7 +2459,8 @@ type SiteglobalSeoArgs = {
 };
 
 enum SiteLocale {
-  en = 'en'
+  en = 'en',
+  sv = 'sv'
 }
 
 /** Specifies how to filter Slug fields */
@@ -2543,6 +2545,12 @@ type StringMatchesFilter = {
   caseSensitive?: InputMaybe<Scalars['BooleanType']>;
   pattern: Scalars['String'];
   regexp?: InputMaybe<Scalars['BooleanType']>;
+};
+
+type StringNonNullMultiLocaleField = {
+  __typename?: 'StringNonNullMultiLocaleField';
+  locale?: Maybe<SiteLocale>;
+  value: Scalars['String'];
 };
 
 /** Specifies how to filter Structured Text fields */
@@ -3129,14 +3137,14 @@ type GlobalQuery = { __typename?: 'Query', site: { __typename?: 'Site', favicon:
 type AllPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type AllPostsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'PostRecord', id: any, title?: string | null, slug: string, content?: string | null, image?: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null, video?: { __typename?: 'UploadVideoField', thumbnailUrl: string, streamingUrl: string, framerate?: number | null, duration?: number | null, mp4high?: string | null, mp4med?: string | null, mp4low?: string | null } | null } | null }> };
+type AllPostsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'PostRecord', id: any, title: string, slug: string, content?: string | null, image?: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null, video?: { __typename?: 'UploadVideoField', thumbnailUrl: string, streamingUrl: string, framerate?: number | null, duration?: number | null, mp4high?: string | null, mp4med?: string | null, mp4low?: string | null } | null } | null }> };
 
 type PostQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']>;
 }>;
 
 
-type PostQuery = { __typename?: 'Query', post?: { __typename?: 'PostRecord', id: any, slug: string, title?: string | null, content?: string | null, image?: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null, video?: { __typename?: 'UploadVideoField', thumbnailUrl: string, streamingUrl: string, framerate?: number | null, duration?: number | null, mp4high?: string | null, mp4med?: string | null, mp4low?: string | null } | null } | null, structuredContent?: { __typename?: 'PostModelStructuredContentField', blocks: Array<string> } | null } | null };
+type PostQuery = { __typename?: 'Query', post?: { __typename?: 'PostRecord', id: any, slug: string, title: string, content?: string | null, image?: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null, video?: { __typename?: 'UploadVideoField', thumbnailUrl: string, streamingUrl: string, framerate?: number | null, duration?: number | null, mp4high?: string | null, mp4med?: string | null, mp4low?: string | null } | null } | null, structuredContent?: { __typename?: 'PostModelStructuredContentField', blocks: Array<string> } | null } | null };
 
 type SiteQueryVariables = Exact<{ [key: string]: never; }>;
 
