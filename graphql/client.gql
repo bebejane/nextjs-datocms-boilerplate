@@ -1,0 +1,11 @@
+query AllClients {
+	clients: allClients {
+		...ClientFragment
+	}
+}
+
+query Client($id: ItemId!) {
+	client(filter: { id: { eq: $id } }) {
+		...ClientFragment
+	}
+}

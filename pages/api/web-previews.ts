@@ -11,11 +11,8 @@ export default withWebPreviewsEdge(async ({ item, itemType, locale }) => {
   const { slug } = item.attributes
 
   switch (itemType.attributes.api_key) {
-    case 'post':
-      path = `/posts/${slug}`
-      break;
-    case 'user':
-      path = `/users/${slug}`
+    case 'startt':
+      path = `/`
       break;
     default:
       break;

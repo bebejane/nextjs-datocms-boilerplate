@@ -1,4 +1,23 @@
 
+declare module '*/client.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const AllClients: DocumentNode;
+export const Client: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/ClientFragment.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ClientFragment: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/ImageFragment.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -12,6 +31,15 @@ declare module '*/ImageThumbnailFragment.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const ImageThumbnailFragment: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/ProductFragment.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ProductFragment: DocumentNode;
 
   export default defaultDocument;
 }
@@ -53,11 +81,11 @@ declare module '*/global.gql' {
 }
     
 
-declare module '*/post.gql' {
+declare module '*/product.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const AllPosts: DocumentNode;
-export const Post: DocumentNode;
+  export const AllProducts: DocumentNode;
+export const Product: DocumentNode;
 
   export default defaultDocument;
 }
@@ -67,16 +95,6 @@ declare module '*/seo.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const Site: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/user.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const AllUsers: DocumentNode;
-export const User: DocumentNode;
 
   export default defaultDocument;
 }

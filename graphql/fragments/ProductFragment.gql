@@ -1,0 +1,15 @@
+fragment ProductFragment on ProductRecord {
+	id
+	client {
+		...ClientFragment
+	}
+	png {
+		...ImageFragment
+	}
+	tif {
+		...ImageFragment
+	}
+	productId
+	tags
+	batch
+}
