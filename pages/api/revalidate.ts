@@ -42,8 +42,7 @@ export function withRevalidate(callback: (record: any, revalidate: (paths: strin
       throw 'Payload is empty'
 
     const record = await recordFromPayload(payload)
-    record._payload = payload.entity
-
+    console.log(record)
     callback(record, async (paths) => {
       try {
         if (!paths || !paths.length)
