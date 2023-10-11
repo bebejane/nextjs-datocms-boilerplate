@@ -57,6 +57,7 @@ export function withRevalidate(callback: (record: any, revalidate: (paths: strin
       return res.status(401).send('Access denied')
 
     const payload = req.body;
+    console.log(payload)
 
     if (!payload || !payload.entity)
       throw 'Payload is empty'
