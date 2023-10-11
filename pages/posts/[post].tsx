@@ -7,15 +7,16 @@ import { useQuerySubscription } from 'react-datocms';
 
 export type Props = {
   post: PostRecord
+  preview: boolean
 }
 
-export default function Post({ post: postFromProps }: Props) {
+export default function Post({ post: postFromProps, preview }: Props) {
 
   const { data: { post }, error, status } = useQuerySubscription({
     enabled: true,
     token: process.env.NEXT_PUBLIC_GRAPHQL_API_TOKEN,
     query: PostDocument,
-    includeDrafts: true,
+    includeDrafts: preview,
     excludeInvalid: true,
     variables: { slug: postFromProps.slug },
     initialData: { post: postFromProps },
@@ -56,6 +57,7 @@ export const getStaticProps: GetStaticProps = withGlobalProps(null, async ({ pro
     props: {
       ...props,
       post,
+      preview: context.preview || false
     },
     revalidate
   }
