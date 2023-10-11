@@ -23,7 +23,7 @@ const recordFromPayload = async (payload): Promise<any> => {
   if (!model)
     throw new Error(`Model not found in payload`)
 
-  return { ...entity.attributes, model }
+  return { ...entity.attributes, model: model.attributes }
 }
 
 export function withRevalidate(callback: (record: any, revalidate: (paths: string[]) => Promise<void>) => Promise<void>): (req: NextApiRequest, res: NextApiResponse) => void {
@@ -42,7 +42,7 @@ export function withRevalidate(callback: (record: any, revalidate: (paths: strin
       throw 'Payload is empty'
 
     const record = await recordFromPayload(payload)
-    console.log(record)
+
     callback(record, async (paths) => {
       try {
         if (!paths || !paths.length)
@@ -51,7 +51,6 @@ export function withRevalidate(callback: (record: any, revalidate: (paths: strin
         await Promise.all(paths.map(p => res.revalidate(p)))
         return res.json({ revalidated: true, paths })
       } catch (err) {
-        //console.error(err)
         console.log('error when revalidating')
         console.log(err)
         return res.json({ revalidated: false, err })
@@ -68,7 +67,7 @@ export default withRevalidate(async (record, revalidate) => {
 
   switch (api_key) {
     case 'post':
-      paths.push(`/${slug}`)
+      paths.push(`/posts/${slug}`)
       paths.push(`/`)
       break;
     default:
