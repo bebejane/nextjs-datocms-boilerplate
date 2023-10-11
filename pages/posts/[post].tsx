@@ -47,17 +47,13 @@ export const getStaticProps: GetStaticProps = withGlobalProps(null, async ({ pro
 
   const { post } = await apiQuery(PostDocument, { variables: { slug: context.params.post }, preview: context.preview })
 
-  if (!post) {
-    return {
-      notFound: true
-    }
-  }
+  if (!post) return { notFound: true }
 
   return {
     props: {
       ...props,
       post,
-      preview: context.preview || false
+      preview: context.preview ?? false
     },
     revalidate
   }

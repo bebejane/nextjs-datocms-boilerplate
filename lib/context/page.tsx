@@ -11,7 +11,7 @@ const initialState: PageProps = {
 export const PageContext = createContext(initialState);
 
 export type PageProviderProps = {
-  children: React.ReactElement,
+  children: React.ReactElement | React.ReactElement[]
   value: PageProps
 }
 

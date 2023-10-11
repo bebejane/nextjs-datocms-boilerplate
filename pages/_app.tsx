@@ -1,8 +1,9 @@
-import '/lib/styles/index.scss'
+import '/styles/index.scss'
 import type { AppProps } from 'next/app'
-import { DatoSEO } from 'dato-nextjs-utils/components';
 import { useRouter } from 'next/router';
 import { PageProvider } from '/lib/context/page';
+import { DefaultDatoSEO } from 'dato-nextjs-utils/components';
+import { DatoAdminLink } from '/components';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -12,10 +13,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <DatoSEO seo={seo} site={site} />
+      <DefaultDatoSEO siteTitle="Boilerplate" site={site} />
       <PageProvider value={{ isHome: pathname === '/' }}>
         <Component {...pageProps} />
       </PageProvider>
+      <DatoAdminLink />
     </>
   )
 }
