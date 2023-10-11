@@ -1,5 +1,0 @@
-fragment ClientFragment on ClientRecord {
-	id
-	name
-	email
-}

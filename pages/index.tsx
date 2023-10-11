@@ -1,23 +1,30 @@
 import styles from './index.module.scss'
-import { withGlobalProps } from 'dato-nextjs-utils/hoc';
+import withGlobalProps from '/lib/withGlobalProps';
 import type { GetStaticProps } from 'next'
+import { AllPostsDocument } from '/graphql';
 import Link from 'next/link';
 
-export type HomeProps = { site: Site }
+export type HomeProps = {
+	posts: PostRecord[]
+}
 
-export default function Home({ site }: HomeProps) {
+export default function Home({ posts }: HomeProps) {
 
 	return (
 		<div className={styles.container}>
-			Automatstudio
+			<h1>Posts</h1>
+			<ul>
+				{posts.map(post => (
+					<li key={post.id}>
+						<Link href={`/posts/${post.slug}`}>
+							{post.title} {post.updatedAt}
+						</Link>
+					</li>
+				))}
+			</ul>
+			{posts.length === 0 && 'No posts yet...'}
 		</div>
 	)
 }
 
-export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate }: any) => {
-
-	return {
-		props,
-		revalidate
-	};
-});
+export const getStaticProps: GetStaticProps = withGlobalProps({ query: AllPostsDocument })

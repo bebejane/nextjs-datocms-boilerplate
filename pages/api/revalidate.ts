@@ -1,6 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { buildClient } from '@datocms/cma-client';
-import { WebhookCallData } from '@datocms/cma-client/dist/types/generated/SchemaTypes';
 
 export const basicAuth = (req: NextApiRequest) => {
 
@@ -65,19 +63,14 @@ export function withRevalidate(callback: (record: any, revalidate: (paths: strin
 
 export default withRevalidate(async (record, revalidate) => {
 
-  const { api_key: apiKey } = record.model;
+  const { api_key } = record.model;
   const { slug } = record
   const paths = []
 
-  switch (apiKey) {
-    case 'start':
-      paths.push(`/`)
-      break;
+  switch (api_key) {
     case 'post':
       paths.push(`/${slug}`)
-      break;
-    case 'user':
-      paths.push(`/${slug}`)
+      paths.push(`/`)
       break;
     default:
       break;

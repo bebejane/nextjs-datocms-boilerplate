@@ -1,0 +1,26 @@
+query AllPosts($first: IntType = 10, $skip: IntType = 0) {
+	posts: allPosts(first: $first, skip: $skip) {
+		id
+		slug
+		title
+		createdAt
+		updatedAt
+	}
+	pagination: _allPostsMeta {
+		count
+	}
+}
+
+query Post($id: ItemId) {
+	post(filter: { id: { eq: $id } }) {
+		id
+		title
+		slug
+		image {
+			...ImageFragment
+		}
+		content(markdown: false)
+		createdAt
+		updatedAt
+	}
+}
