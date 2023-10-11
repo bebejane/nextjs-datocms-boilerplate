@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { buildClient } from '@datocms/cma-client';
+import { WebhookCallData } from '@datocms/cma-client/dist/types/generated/SchemaTypes';
 
 export const basicAuth = (req: NextApiRequest) => {
 
@@ -16,34 +17,15 @@ export const basicAuth = (req: NextApiRequest) => {
   return user === process.env.BASIC_AUTH_USER && pwd === process.env.BASIC_AUTH_PASSWORD
 }
 
-const recordFromPayload = async (payload: any): Promise<any> => {
+const recordFromPayload = async (payload): Promise<any> => {
 
-  const modelId = payload?.entity?.relationships?.item_type?.data?.id
-  const eventType = payload?.event_type
+  const { entity, related_entities } = payload
+  const model = related_entities.find(({ id }) => id === entity.item_type.data.id)
 
-  if (!modelId)
-    throw 'Model id not found in payload!'
+  if (!model)
+    throw new Error(`Model id not found in payload`)
 
-  const client = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN || process.env.NEXT_PUBLIC_GRAPHQL_API_TOKEN, requestTimeout: 3000 })
-  const model = await client.itemTypes.find(modelId)
-
-  try {
-    const record = await client.items.find(payload.entity.id, { version: 'current' })
-
-    if (!record && eventType !== 'delete')
-      throw `No record found with modelId: ${modelId} (${model.api_key})`
-
-    return { ...record, model }
-  } catch (err) {
-
-    const isDeleted = err.response?.status === 404 && (eventType === 'delete' || eventType === 'unpublish');
-
-    if (isDeleted)
-      return { id: payload.entity.id, ...payload.entity.attributes, model }
-    else
-      throw err;
-  }
-
+  return { ...entity.attributes, model }
 }
 
 export function withRevalidate(callback: (record: any, revalidate: (paths: string[]) => Promise<void>) => Promise<void>): (req: NextApiRequest, res: NextApiResponse) => void {
@@ -57,7 +39,6 @@ export function withRevalidate(callback: (record: any, revalidate: (paths: strin
       return res.status(401).send('Access denied')
 
     const payload = req.body;
-    console.log(payload)
 
     if (!payload || !payload.entity)
       throw 'Payload is empty'
@@ -91,6 +72,12 @@ export default withRevalidate(async (record, revalidate) => {
   switch (apiKey) {
     case 'start':
       paths.push(`/`)
+      break;
+    case 'post':
+      paths.push(`/${slug}`)
+      break;
+    case 'user':
+      paths.push(`/${slug}`)
       break;
     default:
       break;
