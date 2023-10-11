@@ -94,10 +94,6 @@ export default withRevalidate(async (record, revalidate) => {
     default:
       break;
   }
-<<<<<<< HEAD
-
-=======
   console.log('revalidating paths', paths)
->>>>>>> 1d4fd92 (update)
   revalidate(paths)
 })
