@@ -17,11 +17,11 @@ export const basicAuth = (req: NextApiRequest) => {
 
 const recordFromPayload = async (payload): Promise<any> => {
 
-  const { entity, related_entities } = payload
-  const model = related_entities.find(({ id }) => id === entity.item_type.data.id)
+  const { entity, relationships, related_entities } = payload
+  const model = related_entities.find(({ id }) => id === relationships.item_type.data.id)
 
   if (!model)
-    throw new Error(`Model id not found in payload`)
+    throw new Error(`Model not found in payload`)
 
   return { ...entity.attributes, model }
 }
