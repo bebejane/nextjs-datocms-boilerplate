@@ -15,6 +15,8 @@ export default function Post({ post: postFromProps }: Props) {
     enabled: true,
     token: process.env.NEXT_PUBLIC_GRAPHQL_API_TOKEN,
     query: PostDocument,
+    includeDrafts: true,
+    excludeInvalid: true,
     variables: { slug: postFromProps.slug },
     initialData: { post: postFromProps },
     reconnectionPeriod: 5000,
