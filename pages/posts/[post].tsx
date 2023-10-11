@@ -3,12 +3,25 @@ import { apiQuery, apiQueryAll } from 'dato-nextjs-utils/api';
 import withGlobalProps from '/lib/withGlobalProps';
 import type { GetStaticProps } from 'next'
 import { AllPostsDocument, PostDocument } from '/graphql';
+import { useQuerySubscription } from 'react-datocms';
 
 export type Props = {
   post: PostRecord
 }
 
-export default function Post({ post }: Props) {
+export default function Post({ post: postFromProps }: Props) {
+
+  const { data: { post }, error, status } = useQuerySubscription({
+    enabled: true,
+    token: process.env.NEXT_PUBLIC_GRAPHQL_API_TOKEN,
+    query: PostDocument,
+    variables: { slug: postFromProps.slug },
+    initialData: { post: postFromProps },
+    reconnectionPeriod: 5000,
+  })
+
+  if (error)
+    return <div>{error.message}</div>
 
   return (
     <div className={s.container}>
