@@ -12,12 +12,11 @@ export default function useLivePreview(
   initialData: any = {},
   options: LivePreviewOptions = {
     preview: false,
-    variables: {},
-    apiToken: process.env.NEXT_PUBLIC_GRAPHQL_API_TOKEN
+    variables: {}
   }) {
 
   const { data, error, status } = useQuerySubscription({
-    token: options.apiToken,
+    token: options.apiToken || process.env.NEXT_PUBLIC_GRAPHQL_API_TOKEN,
     query: query,
     initialData,
     variables: options.variables,

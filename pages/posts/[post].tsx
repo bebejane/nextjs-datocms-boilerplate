@@ -12,10 +12,12 @@ export type Props = {
 
 export default function Post({ post: _post, preview }: Props) {
 
-  const { data: { post }, error } = useLivePreview(PostDocument, { post: _post }, { variables: { slug: _post.slug }, preview })
+  const { data: { post }, error } = useLivePreview(PostDocument, { post: _post }, { variables: { slug: _post.slug }, preview: true })
 
-  if (error)
+  if (error) {
+    console.log(error)
     return <div>{error.message}</div>
+  }
 
   return (
     <div className={s.container}>

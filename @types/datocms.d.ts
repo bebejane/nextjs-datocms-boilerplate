@@ -2485,7 +2485,7 @@ type AllPostsQueryVariables = Exact<{
 type AllPostsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'PostRecord', id: any, slug: string, title: string, createdAt: any, updatedAt: any }>, pagination: { __typename?: 'CollectionMetadata', count: any } };
 
 type PostQueryVariables = Exact<{
-  slug?: InputMaybe<Scalars['String']>;
+  slug: Scalars['String'];
 }>;
 
 
