@@ -1,6 +1,6 @@
 export default function DatoAdminLink() {
 
-  if (!process.env.NEXT_PUBLIC_DATOCMS_ADMIN_URL) return null
+  if (!process.env.NEXT_PUBLIC_DATOCMS_ADMIN_URL || process.env.NODE_ENV === 'production') return null
 
   return (
     <a
