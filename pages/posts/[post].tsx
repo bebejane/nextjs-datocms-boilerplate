@@ -3,6 +3,7 @@ import { apiQuery, apiQueryAll } from 'dato-nextjs-utils/api';
 import withGlobalProps from '/lib/withGlobalProps';
 import type { GetStaticProps } from 'next'
 import { AllPostsDocument, PostDocument } from '/graphql';
+import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components';
 import useLivePreview from '/lib/hooks/useLivePreview';
 
 export type Props = {
@@ -12,7 +13,7 @@ export type Props = {
 
 export default function Post({ post: _post, preview }: Props) {
 
-  const { data: { post }, error } = useLivePreview(PostDocument, { post: _post }, { variables: { slug: _post.slug }, preview: true })
+  const { data: { post }, error } = useLivePreview(PostDocument, { post: _post }, { variables: { slug: _post.slug }, preview })
 
   if (error) {
     console.log(error)
@@ -22,7 +23,7 @@ export default function Post({ post: _post, preview }: Props) {
   return (
     <div className={s.container}>
       <h1>{post.title}</h1>
-      <p>{post.content}</p>
+      <Markdown>{post.content}</Markdown>
     </div>
   )
 }
