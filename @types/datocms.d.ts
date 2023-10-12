@@ -1698,20 +1698,6 @@ enum ItemStatus {
   updated = 'updated'
 }
 
-/** Specifies how to filter Single-link fields */
-type LinkFilter = {
-  /** Search for records with an exact match. The specified value must be a Record ID */
-  eq?: InputMaybe<Scalars['ItemId']>;
-  /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
-  /** Filter records linked to one of the specified records */
-  in?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
-  /** Exclude records with an exact match. The specified value must be a Record ID */
-  neq?: InputMaybe<Scalars['ItemId']>;
-  /** Filter records not linked to one of the specified records */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
-};
-
 enum MuxThumbnailFormatType {
   gif = 'gif',
   jpg = 'jpg',
@@ -1779,7 +1765,6 @@ type PostModelFilter = {
   slug?: InputMaybe<SlugFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
-  user?: InputMaybe<LinkFilter>;
 };
 
 enum PostModelOrderBy {
@@ -1832,7 +1817,6 @@ type PostRecord = RecordInterface & {
   slug: Scalars['String'];
   title: Scalars['String'];
   updatedAt: Scalars['DateTime'];
-  user?: Maybe<UserRecord>;
 };
 
 
@@ -1872,22 +1856,16 @@ type Query = {
   _allPostsMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
   _allUploadsMeta: CollectionMetadata;
-  /** Returns meta information regarding a record collection */
-  _allUsersMeta: CollectionMetadata;
   /** Returns the single instance record */
   _site: Site;
   /** Returns a collection of records */
   allPosts: Array<PostRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
-  /** Returns a collection of records */
-  allUsers: Array<UserRecord>;
   /** Returns a specific record */
   post?: Maybe<PostRecord>;
   /** Returns a specific asset */
   upload?: Maybe<FileField>;
-  /** Returns a specific record */
-  user?: Maybe<UserRecord>;
 };
 
 
@@ -1901,13 +1879,6 @@ type Query_allPostsMetaArgs = {
 /** The query root for this schema */
 type Query_allUploadsMetaArgs = {
   filter?: InputMaybe<UploadFilter>;
-  locale?: InputMaybe<SiteLocale>;
-};
-
-
-/** The query root for this schema */
-type Query_allUsersMetaArgs = {
-  filter?: InputMaybe<UserModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -1942,17 +1913,6 @@ type QueryallUploadsArgs = {
 
 
 /** The query root for this schema */
-type QueryallUsersArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<UserModelFilter>;
-  first?: InputMaybe<Scalars['IntType']>;
-  locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<UserModelOrderBy>>>;
-  skip?: InputMaybe<Scalars['IntType']>;
-};
-
-
-/** The query root for this schema */
 type QuerypostArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<PostModelFilter>;
@@ -1967,15 +1927,6 @@ type QueryuploadArgs = {
   filter?: InputMaybe<UploadFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<UploadOrderBy>>>;
-};
-
-
-/** The query root for this schema */
-type QueryuserArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<UserModelFilter>;
-  locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<UserModelOrderBy>>>;
 };
 
 type RecordInterface = {
@@ -2062,8 +2013,7 @@ type SiteglobalSeoArgs = {
 };
 
 enum SiteLocale {
-  en = 'en',
-  sv = 'sv'
+  en = 'en'
 }
 
 /** Specifies how to filter Slug fields */
@@ -2497,84 +2447,6 @@ type UploadWidthFilter = {
   lte?: InputMaybe<Scalars['IntType']>;
   /** Search assets that do not have the specified width */
   neq?: InputMaybe<Scalars['IntType']>;
-};
-
-type UserModelFilter = {
-  AND?: InputMaybe<Array<InputMaybe<UserModelFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<UserModelFilter>>>;
-  _createdAt?: InputMaybe<CreatedAtFilter>;
-  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
-  _isValid?: InputMaybe<BooleanFilter>;
-  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
-  _publishedAt?: InputMaybe<PublishedAtFilter>;
-  _status?: InputMaybe<StatusFilter>;
-  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
-  _updatedAt?: InputMaybe<UpdatedAtFilter>;
-  createdAt?: InputMaybe<CreatedAtFilter>;
-  email?: InputMaybe<StringFilter>;
-  id?: InputMaybe<ItemIdFilter>;
-  name?: InputMaybe<StringFilter>;
-  slug?: InputMaybe<SlugFilter>;
-  updatedAt?: InputMaybe<UpdatedAtFilter>;
-};
-
-enum UserModelOrderBy {
-  _createdAt_ASC = '_createdAt_ASC',
-  _createdAt_DESC = '_createdAt_DESC',
-  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
-  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
-  _isValid_ASC = '_isValid_ASC',
-  _isValid_DESC = '_isValid_DESC',
-  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
-  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
-  _publishedAt_ASC = '_publishedAt_ASC',
-  _publishedAt_DESC = '_publishedAt_DESC',
-  _status_ASC = '_status_ASC',
-  _status_DESC = '_status_DESC',
-  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
-  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
-  _updatedAt_ASC = '_updatedAt_ASC',
-  _updatedAt_DESC = '_updatedAt_DESC',
-  createdAt_ASC = 'createdAt_ASC',
-  createdAt_DESC = 'createdAt_DESC',
-  email_ASC = 'email_ASC',
-  email_DESC = 'email_DESC',
-  id_ASC = 'id_ASC',
-  id_DESC = 'id_DESC',
-  name_ASC = 'name_ASC',
-  name_DESC = 'name_DESC',
-  updatedAt_ASC = 'updatedAt_ASC',
-  updatedAt_DESC = 'updatedAt_DESC'
-}
-
-/** Record of type User (user) */
-type UserRecord = RecordInterface & {
-  __typename?: 'UserRecord';
-  _createdAt: Scalars['DateTime'];
-  /** Editing URL */
-  _editingUrl?: Maybe<Scalars['String']>;
-  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
-  _isValid: Scalars['BooleanType'];
-  _modelApiKey: Scalars['String'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
-  _publishedAt?: Maybe<Scalars['DateTime']>;
-  /** Generates SEO and Social card meta tags to be used in your frontend */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
-  _updatedAt: Scalars['DateTime'];
-  createdAt: Scalars['DateTime'];
-  email: Scalars['String'];
-  id: Scalars['ItemId'];
-  name?: Maybe<Scalars['String']>;
-  slug?: Maybe<Scalars['String']>;
-  updatedAt: Scalars['DateTime'];
-};
-
-
-/** Record of type User (user) */
-type UserRecord_seoMetaTagsArgs = {
-  locale?: InputMaybe<SiteLocale>;
 };
 
 enum VideoMp4Res {
