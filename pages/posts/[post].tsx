@@ -4,6 +4,7 @@ import withGlobalProps from '/lib/withGlobalProps';
 import type { GetStaticProps } from 'next'
 import { AllPostsDocument, PostDocument } from '/graphql';
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components';
+import { Image } from 'react-datocms';
 import useLivePreview from '/lib/hooks/useLivePreview';
 
 export type Props = {
@@ -24,6 +25,7 @@ export default function Post({ post: _post, preview }: Props) {
     <div className={s.container}>
       <h1>{post.title}</h1>
       <Markdown>{post.content}</Markdown>
+      {post.image && <Image data={post.image.responsiveImage} className={s.image} />}
     </div>
   )
 }
