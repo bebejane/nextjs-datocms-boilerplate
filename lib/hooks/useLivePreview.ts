@@ -15,7 +15,7 @@ export default function useLivePreview(
     variables: {},
     apiToken: process.env.NEXT_PUBLIC_GRAPHQL_API_TOKEN
   }) {
-
+  console.log(process.env.NEXT_PUBLIC_GRAPHQL_API_TOKEN)
   const { data, error, status } = useQuerySubscription({
     token: options.apiToken,
     query: query,
@@ -26,8 +26,9 @@ export default function useLivePreview(
     excludeInvalid: true,
     reconnectionPeriod: 5000,
   })
-  console.log(data)
-
+  console.log(error)
   return { data, error, status }
 
 }
+
+// http://localhost:3000/api/preview?slug=/posts/testar&secret=jcV0Zcu6Yyl9
