@@ -26,6 +26,7 @@ export default function useLivePreview(
     excludeInvalid: true,
     reconnectionPeriod: 5000,
   })
+  console.log(data)
 
   return { data, error, status }
 
