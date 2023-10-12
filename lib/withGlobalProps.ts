@@ -21,6 +21,7 @@ export default function withGlobalProps(opt?: GlobalPropsOptions, callback?: Fun
   return async (context: any) => {
 
     const props = await apiQuery(queries, { preview: context.preview });
+    props.preview = context.preview ?? false;
 
     if (callback)
       return await callback({ context, props: { ...props }, revalidate });

@@ -3,25 +3,16 @@ import { apiQuery, apiQueryAll } from 'dato-nextjs-utils/api';
 import withGlobalProps from '/lib/withGlobalProps';
 import type { GetStaticProps } from 'next'
 import { AllPostsDocument, PostDocument } from '/graphql';
-import { useQuerySubscription } from 'react-datocms';
+import useLivePreview from '/lib/hooks/useLivePreview';
 
 export type Props = {
   post: PostRecord
   preview: boolean
 }
 
-export default function Post({ post: postFromProps, preview }: Props) {
+export default function Post({ post: _post, preview }: Props) {
 
-  const { data: { post }, error, status } = useQuerySubscription({
-    enabled: true,
-    token: process.env.NEXT_PUBLIC_GRAPHQL_API_TOKEN,
-    query: PostDocument,
-    includeDrafts: preview,
-    excludeInvalid: true,
-    variables: { slug: postFromProps.slug },
-    initialData: { post: postFromProps },
-    reconnectionPeriod: 5000,
-  })
+  const { data: { post }, error } = useLivePreview(PostDocument, _post, { preview })
 
   if (error)
     return <div>{error.message}</div>
@@ -52,8 +43,7 @@ export const getStaticProps: GetStaticProps = withGlobalProps(null, async ({ pro
   return {
     props: {
       ...props,
-      post,
-      preview: context.preview ?? false
+      post
     },
     revalidate
   }
