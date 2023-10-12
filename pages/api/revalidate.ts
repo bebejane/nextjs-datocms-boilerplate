@@ -14,8 +14,6 @@ export default withRevalidate(async (record, revalidate) => {
     default:
       break;
   }
-  console.log('revalidating paths', paths)
-  console.log('dates', updated_at, new Date().toISOString())
-  console.log('delay', `${new Date(updated_at).getTime() - new Date().getTime()}ms`)
+  console.log('revalidating paths', `${new Date().getTime() - new Date(updated_at).getTime()}ms`, paths)
   revalidate(paths)
 })
