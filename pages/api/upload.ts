@@ -9,7 +9,7 @@ export const config = {
 };
 
 export default async function handler(req, res) {
-  const form = formidable({ keepExtensions: true, uploadDir: './public/_uploads' });
+  const form = formidable({ keepExtensions: true, uploadDir: '/tmp' });
 
   form.parse(req, (err, fields, files) => {
     if (err) {
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 
       const file = files.file[0];
       const oldPath = file.filepath;
-      const newPath = `./public/_uploads/${file.originalFilename}`;
+      const newPath = `/tmp/${file.originalFilename}`;
 
       fs.rename(oldPath, newPath, (renameErr) => {
         if (renameErr) {
