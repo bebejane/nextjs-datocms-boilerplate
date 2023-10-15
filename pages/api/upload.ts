@@ -19,12 +19,12 @@ export default async function handler(req, res) {
       const file = files.file[0];
       const oldPath = file.filepath;
       const newPath = `/tmp/${file.originalFilename}`;
-
+      const tmpDirFiles = fs.readdirSync('/tmp');
       fs.rename(oldPath, newPath, (renameErr) => {
         if (renameErr) {
           res.status(500).json({ error: 'File rename failed.' });
         } else {
-          res.status(200).json({ message: 'File uploaded successfully.' });
+          res.status(200).json({ message: 'File uploaded successfully.', tmpDirFiles });
         }
       });
     }
