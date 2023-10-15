@@ -27,6 +27,7 @@ export const getServerSideProps: GetServerSideProps = async function ({ res, req
   if (!site?.favicon.url)
     return { notFound: true }
 
+  console.log('favicon', site.favicon.url)
   const reader = (await fetch(site.favicon.url)).body.getReader()
 
   while (true) {
