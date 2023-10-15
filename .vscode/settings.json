@@ -1,11 +1,11 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "files.exclude": {
-    ".vscode": false,
-    "@types": false,
-    ".vercel": false,
-    ".next": false,
-    "node_modules": false
+    ".vscode": true,
+    "@types": true,
+    ".vercel": true,
+    ".next": true,
+    "node_modules": true
   },
   "workspace.isHidden": true,
   "dotenv.enableAutocloaking": false
