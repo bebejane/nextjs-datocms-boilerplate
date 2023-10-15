@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 
   form.parse(req, (err, fields, files) => {
     if (err) {
-      res.status(500).json({ error: 'File upload failed.' });
+      res.status(500).json({ error: 'File upload failed.', message: err });
     } else {
 
       const file = files.file[0];
