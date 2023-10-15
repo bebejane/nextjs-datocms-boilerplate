@@ -1,8 +1,9 @@
 // pages/api/upload.js
 import formidable from 'formidable';
 import fs from 'fs';
+import { PageConfig } from 'next';
 
-export const config = {
+export const config: PageConfig = {
   api: {
     bodyParser: false, // Disable built-in body parsing
   },
