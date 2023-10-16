@@ -5,7 +5,7 @@ import type { GetStaticProps } from 'next'
 import { AllPostsDocument, PostDocument } from '/graphql';
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components';
 import { Image } from 'react-datocms';
-import useLivePreview from '/lib/hooks/useLivePreview';
+import { useLivePreview } from 'dato-nextjs-utils/hooks';
 
 export type Props = {
   post: PostRecord
