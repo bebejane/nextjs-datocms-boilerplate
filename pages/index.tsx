@@ -1,4 +1,4 @@
-import styles from './index.module.scss'
+import s from './index.module.scss'
 import withGlobalProps from '/lib/withGlobalProps';
 import type { GetStaticProps } from 'next'
 import { AllPostsDocument } from '/graphql';
@@ -11,7 +11,7 @@ export type HomeProps = {
 export default function Home({ posts }: HomeProps) {
 
 	return (
-		<div className={styles.container}>
+		<div className={s.container}>
 			<h1>Posts</h1>
 			<ul>
 				{posts.map(post => (
