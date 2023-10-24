@@ -9,14 +9,14 @@ dependencies:
     specifier: ^3.7.15
     version: 3.7.15(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
   '@datocms/cma-client':
-    specifier: 1.3.1
-    version: 1.3.1
+    specifier: 2.2.6
+    version: 2.2.6
   '@datocms/cma-client-browser':
     specifier: ^1.3.5
     version: 1.3.5
   '@datocms/cma-client-node':
-    specifier: ^1.3.5
-    version: 1.3.5
+    specifier: ^2.2.6
+    version: 2.2.6
   '@graphql-codegen/typescript-react-apollo':
     specifier: ^3.3.7
     version: 3.3.7(graphql-tag@2.12.6)(graphql@16.8.1)
@@ -40,7 +40,7 @@ dependencies:
     version: 2.3.2
   dato-nextjs-utils:
     specifier: github:bebejane/dato-nextjs-utils
-    version: github.com/bebejane/dato-nextjs-utils/189403c1d2fb178464bbc925acea8cae8471e17a(@apollo/client@3.7.15)(@datocms/cma-client@1.3.1)(@types/node@20.8.4)(@types/react-dom@18.2.13)(@types/react@18.2.28)(datocms-listen@0.1.15)(next-seo@5.15.0)(next@13.5.4)(react-datocms@3.1.4)(react-dom@18.2.0)(react@18.2.0)
+    version: github.com/bebejane/dato-nextjs-utils/3384db96fdcfd5df986dda3db28045775f55773c(@apollo/client@3.7.15)(@datocms/cma-client-node@2.2.6)(@datocms/cma-client@2.2.6)(@types/node@20.8.4)(@types/react-dom@18.2.14)(@types/react@18.2.28)(datocms-listen@0.1.15)(next-seo@5.15.0)(next@13.5.4)(react-datocms@3.1.4)(react-dom@18.2.0)(react@18.2.0)
   datocms-structured-text-utils:
     specifier: ^2.0.4
     version: 2.0.4
@@ -1871,10 +1871,10 @@ packages:
       - encoding
     dev: false
 
-  /@datocms/cma-client-node@1.3.5:
-    resolution: {integrity: sha512-2PJeAq5/mBlpk3hM2iRQ9tRIXvfdwbONDBls8QiB7miMkxODErRPvtYk7FBG0b9i89AWLjUGGyLGaVN5FHPUeQ==}
+  /@datocms/cma-client-node@2.2.6:
+    resolution: {integrity: sha512-ODkTT/uDoemhSjk/oic1CEkIkDCHysYlaih6uFrVZEoEqrqpilntZLxDwu2F6UbAn7jLczIX0MAevZIVFx6pSw==}
     dependencies:
-      '@datocms/cma-client': 1.3.5
+      '@datocms/cma-client': 2.2.6
       '@datocms/rest-client-utils': 1.3.3
       got: 11.8.6
       mime-types: 2.1.35
@@ -1883,16 +1883,16 @@ packages:
       - encoding
     dev: false
 
-  /@datocms/cma-client@1.3.1:
-    resolution: {integrity: sha512-P++vaTbZJFzDlnnkhGmxltzLlRjQWZTn5JHReR6OGbg9EeOBLg5A59a5Huf5CUqvkHj8u0y0EYQKUrXhQnesmA==}
+  /@datocms/cma-client@1.3.5:
+    resolution: {integrity: sha512-odw6ZaiiMycAEurXXstXcZgkitWJtGjyt0ieoMLM0vyIQwlFf1l412iQieB2Eylus2sE2M2HT97lRn11uePIsw==}
     dependencies:
       '@datocms/rest-client-utils': 1.3.3
     transitivePeerDependencies:
       - encoding
     dev: false
 
-  /@datocms/cma-client@1.3.5:
-    resolution: {integrity: sha512-odw6ZaiiMycAEurXXstXcZgkitWJtGjyt0ieoMLM0vyIQwlFf1l412iQieB2Eylus2sE2M2HT97lRn11uePIsw==}
+  /@datocms/cma-client@2.2.6:
+    resolution: {integrity: sha512-4g0R8DGZT+XRdAiHeUlLxi0O7o89ZV0LQJxYq8eIqGa/Ib6zNBwr4C4CvKXZt4IF2cO8ZEkrB/r0aXZjFz+pYA==}
     dependencies:
       '@datocms/rest-client-utils': 1.3.3
     transitivePeerDependencies:
@@ -3450,10 +3450,14 @@ packages:
   /@types/prop-types@15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
 
-  /@types/react-dom@18.2.13:
-    resolution: {integrity: sha512-eJIUv7rPP+EC45uNYp/ThhSpE16k22VJUknt5OLoH9tbXoi8bMhwLf5xRuWMywamNbWzhrSmU7IBJfPup1+3fw==}
+  /@types/prop-types@15.7.9:
+    resolution: {integrity: sha512-n1yyPsugYNSmHgxDFjicaI2+gCNjsBck8UX9kuofAKlc0h1bL+20oSF72KeNaW2DUlesbEVCFgyV2dPGTiY42g==}
+    dev: false
+
+  /@types/react-dom@18.2.14:
+    resolution: {integrity: sha512-V835xgdSVmyQmI1KLV2BEIUgqEuinxp9O4G6g3FqO/SqLac049E53aysv0oEFD2kHfejeKU+ZqL2bcFWj9gLAQ==}
     dependencies:
-      '@types/react': 18.2.28
+      '@types/react': 18.2.31
     dev: false
 
   /@types/react@18.2.28:
@@ -3463,6 +3467,14 @@ packages:
       '@types/scheduler': 0.16.3
       csstype: 3.1.2
 
+  /@types/react@18.2.31:
+    resolution: {integrity: sha512-c2UnPv548q+5DFh03y8lEDeMfDwBn9G3dRwfkrxQMo/dOtRHUUO57k6pHvBIfH/VF4Nh+98mZ5aaSe+2echD5g==}
+    dependencies:
+      '@types/prop-types': 15.7.9
+      '@types/scheduler': 0.16.5
+      csstype: 3.1.2
+    dev: false
+
   /@types/responselike@1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
@@ -3471,6 +3483,10 @@ packages:
 
   /@types/scheduler@0.16.3:
     resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
+
+  /@types/scheduler@0.16.5:
+    resolution: {integrity: sha512-s/FPdYRmZR8SjLWGMCuax7r3qCWQw9QKHzXVukAuuIJkXkDRwp+Pu5LMIVFi0Fxbav35WURicYr8u1QsoybnQw==}
+    dev: false
 
   /@types/unist@2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
@@ -9719,15 +9735,16 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
 
-  github.com/bebejane/dato-nextjs-utils/189403c1d2fb178464bbc925acea8cae8471e17a(@apollo/client@3.7.15)(@datocms/cma-client@1.3.1)(@types/node@20.8.4)(@types/react-dom@18.2.13)(@types/react@18.2.28)(datocms-listen@0.1.15)(next-seo@5.15.0)(next@13.5.4)(react-datocms@3.1.4)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/189403c1d2fb178464bbc925acea8cae8471e17a}
-    id: github.com/bebejane/dato-nextjs-utils/189403c1d2fb178464bbc925acea8cae8471e17a
+  github.com/bebejane/dato-nextjs-utils/3384db96fdcfd5df986dda3db28045775f55773c(@apollo/client@3.7.15)(@datocms/cma-client-node@2.2.6)(@datocms/cma-client@2.2.6)(@types/node@20.8.4)(@types/react-dom@18.2.14)(@types/react@18.2.28)(datocms-listen@0.1.15)(next-seo@5.15.0)(next@13.5.4)(react-datocms@3.1.4)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/3384db96fdcfd5df986dda3db28045775f55773c}
+    id: github.com/bebejane/dato-nextjs-utils/3384db96fdcfd5df986dda3db28045775f55773c
     name: dato-nextjs-utils
-    version: 1.0.370
+    version: 1.0.387
     engines: {node: '>=0.16'}
     peerDependencies:
       '@apollo/client': '>=3'
       '@datocms/cma-client': '>= 1.1.0'
+      '@datocms/cma-client-node': '>= 2.0.0'
       '@types/node': '>= 16'
       '@types/react': '>= 17'
       '@types/react-dom': '>= 17'
@@ -9739,11 +9756,12 @@ packages:
       react-dom: '>= 16'
     dependencies:
       '@apollo/client': 3.7.15(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
-      '@datocms/cma-client': 1.3.1
+      '@datocms/cma-client': 2.2.6
+      '@datocms/cma-client-node': 2.2.6
       '@next/env': 13.5.4
       '@types/node': 20.8.4
       '@types/react': 18.2.28
-      '@types/react-dom': 18.2.13
+      '@types/react-dom': 18.2.14
       datocms-listen: 0.1.15(graphql@16.8.1)
       markdown-truncate: 1.1.0
       next: 13.5.4(@babel/core@7.22.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.2)

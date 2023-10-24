@@ -1,0 +1,1 @@
+export { withTests as default } from 'dato-nextjs-utils/hoc';

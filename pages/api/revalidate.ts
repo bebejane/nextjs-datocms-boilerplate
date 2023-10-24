@@ -14,5 +14,6 @@ export default withRevalidate(async (record, revalidate) => {
     default:
       break;
   }
+
   revalidate(paths)
 })
