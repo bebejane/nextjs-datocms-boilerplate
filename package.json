@@ -20,6 +20,7 @@
     "@datocms/cma-client-browser": "^3.0.1",
     "@datocms/cma-client-node": "^3.0.1",
     "@graphql-codegen/typescript-react-apollo": "^3.3.7",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@next/bundle-analyzer": "^12.3.4",
     "@next/env": "^13.5.6",
     "@types/formidable": "^3.4.4",
