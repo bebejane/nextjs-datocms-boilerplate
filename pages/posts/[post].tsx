@@ -2,7 +2,7 @@ import s from './[post].module.scss'
 import { apiQuery, apiQueryAll } from 'dato-nextjs-utils/api';
 import withGlobalProps from '/lib/withGlobalProps';
 import type { GetStaticProps } from 'next'
-import { AllPostsDocument, PostDocument } from '/graphql';
+import { AllPostsDocument, PostDocument } from '/lib/graphql';
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components';
 import { Image } from 'react-datocms';
 import { useLivePreview } from 'dato-nextjs-utils/hooks';

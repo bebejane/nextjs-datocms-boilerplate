@@ -1,7 +1,7 @@
 import s from './index.module.scss'
 import withGlobalProps from '/lib/withGlobalProps';
 import type { GetStaticProps } from 'next'
-import { AllPostsDocument } from '/graphql';
+import { AllPostsDocument } from '/lib/graphql';
 import Link from 'next/link';
 
 export type HomeProps = {
