@@ -1,2 +1,1 @@
-import { withPreview } from "dato-nextjs-utils/hoc"
-export default withPreview
+export { withPreview as default } from "dato-nextjs-utils/hoc"
