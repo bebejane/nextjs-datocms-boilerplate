@@ -10,7 +10,7 @@
 		},
 		{
 			"path": "/api/backup?max=2",
-			"schedule": "* * * * *"
+			"schedule": "0 22 * * *"
 		}
 	]
 }
