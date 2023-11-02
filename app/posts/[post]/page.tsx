@@ -11,7 +11,7 @@ export async function generateStaticParams() {
   const { posts } = await apiQuery<AllPostsQuery>(AllPostsDocument);
 
   return posts.map((post) => ({
-    slug: post.slug,
+    post: post.slug,
   }))
 }
 
