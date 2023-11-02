@@ -1,5 +1,4 @@
 'use server'
-'use server'
 
 import s from './page.module.scss'
 import { notFound } from 'next/navigation';
@@ -17,7 +16,7 @@ export async function generateStaticParams() {
 
 export default async function Post({ params }: { params: { post: string } }) {
 
-  const { post } = await apiQuery<PostQuery>(PostDocument, { variables: { slug: params.post } });
+  const { post } = await apiQuery<PostQuery>(PostDocument, { variables: { slug: params.post }, revalidate: 30 });
 
   if (!post)
     return notFound();

@@ -1,7 +1,7 @@
 import { revalidatePath } from "next/cache";
 
 export default async function withRevalidate(req: Request, callback: (record: any, revalidate: (paths: string[]) => Promise<Response>) => Promise<Response>) {
-  console.log('withRevalidate', req.url)
+
   if (req.method === 'GET' && new URLSearchParams(req.url.split('?')?.[1]).get('ping'))
     return new Response('ok', { status: 200 })
 

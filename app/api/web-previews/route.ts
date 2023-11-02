@@ -1,26 +1,30 @@
-import { withWebPreviewsEdge as POST } from 'dato-nextjs-utils/hoc';
+import { NextRequest } from 'next/server';
+import withWebPreviewsEdge from './withWebPreviewsEdge.js'
 
 export const runtime = "edge"
 
-export default POST(async ({ item, itemType, locale }) => {
+export async function POST(req: NextRequest) {
 
-  let path = null;
+  return withWebPreviewsEdge(req, async ({ item, itemType, locale }) => {
 
-  const { slug } = item.attributes
+    let path = null;
 
-  switch (itemType.attributes.api_key) {
-    case 'start':
-      path = `/`
-      break;
-    case 'post':
-      path = `/posts/${slug}`
-      break;
-    case 'user':
-      path = `/users/${slug}`
-      break;
-    default:
-      break;
-  }
+    const { slug } = item.attributes
 
-  return path
-})
+    switch (itemType.attributes.api_key) {
+      case 'start':
+        path = `/`
+        break;
+      case 'post':
+        path = `/posts/${slug}`
+        break;
+      case 'user':
+        path = `/users/${slug}`
+        break;
+      default:
+        break;
+    }
+
+    return path
+  })
+}
