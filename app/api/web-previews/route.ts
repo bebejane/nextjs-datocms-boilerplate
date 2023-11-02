@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import withWebPreviewsEdge from './withWebPreviewsEdge.js'
+import withWebPreviewsEdge from './withWebPreviewsEdge'
 
 export const runtime = "edge"
 

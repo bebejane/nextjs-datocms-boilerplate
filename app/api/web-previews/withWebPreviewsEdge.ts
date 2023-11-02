@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server.js";
-import cors from './cors.js'
+import { NextRequest, NextResponse } from "next/server";
+import cors from './cors'
 
 export type PreviewLink = {
   label: string
