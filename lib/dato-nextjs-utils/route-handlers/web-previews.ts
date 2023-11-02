@@ -6,15 +6,14 @@ export type PreviewLink = {
   url: string
 }
 
-export default async function withWebPreviewsEdge(req: NextRequest, generatePreviewUrl: (record: any) => Promise<string | null>): Promise<Response> {
+const corsOptions = {
+  origin: '*',
+  methods: ['POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  preflightContinue: false,
+}
 
-  const corsOptions = {
-    origin: '*',
-    methods: ['POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    preflightContinue: false,
-  }
-
+export default async function webPreviews(req: NextRequest, generatePreviewUrl: (record: any) => Promise<string | null>): Promise<Response> {
 
   if (!process.env.NEXT_PUBLIC_SITE_URL && !process.env.SITE_URL)
     throw new Error('NEXT_PUBLIC_SITE_URL is not set in .env')

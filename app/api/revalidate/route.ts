@@ -1,11 +1,11 @@
 
-import withRevalidate from './withRevalidate';
+import revalidate from '/lib/dato-nextjs-utils/route-handlers/revalidate';
 
 export const runtime = "edge"
 
 export async function POST(req: Request) {
 
-  return await withRevalidate(req, async (record, revalidate) => {
+  return await revalidate(req, async (record, revalidate) => {
 
     const { api_key } = record.model;
     const { slug } = record

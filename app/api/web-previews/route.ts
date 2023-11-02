@@ -1,11 +1,11 @@
 import { NextRequest } from 'next/server';
-import withWebPreviewsEdge from './withWebPreviewsEdge'
+import webPreviews from '/lib/dato-nextjs-utils/route-handlers/web-previews'
 
 export const runtime = "edge"
 
 export async function POST(req: NextRequest) {
 
-  return withWebPreviewsEdge(req, async ({ item, itemType, locale }) => {
+  return await webPreviews(req, async ({ item, itemType, locale }) => {
 
     let path = null;
 
