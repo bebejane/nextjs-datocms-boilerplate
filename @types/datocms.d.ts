@@ -76,6 +76,82 @@ type CreatedAtFilter = {
   neq?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
+type ExternalLinkModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ExternalLinkModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<ExternalLinkModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  createdAt?: InputMaybe<CreatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  title?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<UpdatedAtFilter>;
+  url?: InputMaybe<StringFilter>;
+};
+
+enum ExternalLinkModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  title_ASC = 'title_ASC',
+  title_DESC = 'title_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC',
+  url_ASC = 'url_ASC',
+  url_DESC = 'url_DESC'
+}
+
+/** Record of type External link (external_link) */
+type ExternalLinkRecord = RecordInterface & {
+  __typename?: 'ExternalLinkRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  title?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['DateTime']['output'];
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Record of type External link (external_link) */
+type ExternalLinkRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 enum FaviconType {
   appleTouchIcon = 'appleTouchIcon',
   icon = 'icon',
@@ -1682,6 +1758,80 @@ type InUseFilter = {
   eq?: InputMaybe<Scalars['BooleanType']['input']>;
 };
 
+type InternalLinkModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<InternalLinkModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<InternalLinkModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  createdAt?: InputMaybe<CreatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  record?: InputMaybe<LinkFilter>;
+  title?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<UpdatedAtFilter>;
+};
+
+enum InternalLinkModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  title_ASC = 'title_ASC',
+  title_DESC = 'title_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC'
+}
+
+/** Record of type Internal link (internal_link) */
+type InternalLinkRecord = RecordInterface & {
+  __typename?: 'InternalLinkRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  record?: Maybe<PostRecord>;
+  title?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Record of type Internal link (internal_link) */
+type InternalLinkRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 /** Specifies how to filter by ID */
 type ItemIdFilter = {
   /** Search the record with the specified ID */
@@ -1699,6 +1849,20 @@ enum ItemStatus {
   published = 'published',
   updated = 'updated'
 }
+
+/** Specifies how to filter Single-link fields */
+type LinkFilter = {
+  /** Search for records with an exact match. The specified value must be a Record ID */
+  eq?: InputMaybe<Scalars['ItemId']['input']>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']['input']>;
+  /** Filter records linked to one of the specified records */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ItemId']['input']>>>;
+  /** Exclude records with an exact match. The specified value must be a Record ID */
+  neq?: InputMaybe<Scalars['ItemId']['input']>;
+  /** Filter records not linked to one of the specified records */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ItemId']['input']>>>;
+};
 
 enum MuxThumbnailFormatType {
   gif = 'gif',
@@ -1764,10 +1928,14 @@ type PostModelFilter = {
   createdAt?: InputMaybe<CreatedAtFilter>;
   id?: InputMaybe<ItemIdFilter>;
   image?: InputMaybe<FileFilter>;
+  link?: InputMaybe<LinkFilter>;
+  password?: InputMaybe<StringFilter>;
   slug?: InputMaybe<SlugFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
 };
+
+type PostModelLinkField = ExternalLinkRecord | InternalLinkRecord;
 
 enum PostModelOrderBy {
   _createdAt_ASC = '_createdAt_ASC',
@@ -1790,6 +1958,8 @@ enum PostModelOrderBy {
   createdAt_DESC = 'createdAt_DESC',
   id_ASC = 'id_ASC',
   id_DESC = 'id_DESC',
+  password_ASC = 'password_ASC',
+  password_DESC = 'password_DESC',
   title_ASC = 'title_ASC',
   title_DESC = 'title_DESC',
   updatedAt_ASC = 'updatedAt_ASC',
@@ -1816,6 +1986,8 @@ type PostRecord = RecordInterface & {
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ItemId']['output'];
   image?: Maybe<FileField>;
+  link?: Maybe<PostModelLinkField>;
+  password?: Maybe<Scalars['String']['output']>;
   slug: Scalars['String']['output'];
   title: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
@@ -1855,19 +2027,45 @@ type PublishedAtFilter = {
 type Query = {
   __typename?: 'Query';
   /** Returns meta information regarding a record collection */
+  _allExternalLinksMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allInternalLinksMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allPostsMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
   _allUploadsMeta: CollectionMetadata;
   /** Returns the single instance record */
   _site: Site;
   /** Returns a collection of records */
+  allExternalLinks: Array<ExternalLinkRecord>;
+  /** Returns a collection of records */
+  allInternalLinks: Array<InternalLinkRecord>;
+  /** Returns a collection of records */
   allPosts: Array<PostRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
   /** Returns a specific record */
+  externalLink?: Maybe<ExternalLinkRecord>;
+  /** Returns a specific record */
+  internalLink?: Maybe<InternalLinkRecord>;
+  /** Returns a specific record */
   post?: Maybe<PostRecord>;
   /** Returns a specific asset */
   upload?: Maybe<FileField>;
+};
+
+
+/** The query root for this schema */
+type Query_allExternalLinksMetaArgs = {
+  filter?: InputMaybe<ExternalLinkModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type Query_allInternalLinksMetaArgs = {
+  filter?: InputMaybe<InternalLinkModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
 };
 
 
@@ -1893,6 +2091,28 @@ type Query_siteArgs = {
 
 
 /** The query root for this schema */
+type QueryallExternalLinksArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<ExternalLinkModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<ExternalLinkModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+};
+
+
+/** The query root for this schema */
+type QueryallInternalLinksArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<InternalLinkModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<InternalLinkModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+};
+
+
+/** The query root for this schema */
 type QueryallPostsArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<PostModelFilter>;
@@ -1911,6 +2131,24 @@ type QueryallUploadsArgs = {
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<UploadOrderBy>>>;
   skip?: InputMaybe<Scalars['IntType']['input']>;
+};
+
+
+/** The query root for this schema */
+type QueryexternalLinkArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<ExternalLinkModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<ExternalLinkModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+type QueryinternalLinkArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<InternalLinkModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<InternalLinkModelOrderBy>>>;
 };
 
 
