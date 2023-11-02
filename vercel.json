@@ -2,5 +2,11 @@
 	"github": {
 		"silent": true,
 		"enabled": true
-	}
+	},
+	"crons": [
+		{
+			"path": "/api/revalidate?ping=1",
+			"schedule": "*/3 * * * *"
+		}
+	]
 }

@@ -4,8 +4,16 @@
 import s from './page.module.scss'
 import { notFound } from 'next/navigation';
 import { apiQuery } from '/lib/client';
-import { PostDocument } from '/lib/graphql';
+import { AllPostsDocument, PostDocument } from '/lib/graphql';
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components';
+
+export async function generateStaticParams() {
+  const { posts } = await apiQuery<AllPostsQuery>(AllPostsDocument);
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
+}
 
 export default async function Post({ params }) {
 
