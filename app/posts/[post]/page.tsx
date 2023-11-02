@@ -15,7 +15,7 @@ export async function generateStaticParams() {
   }))
 }
 
-export default async function Post({ params }) {
+export default async function Post({ params }: { params: { post: string } }) {
 
   const { post } = await apiQuery<PostQuery>(PostDocument, { variables: { slug: params.post } });
 

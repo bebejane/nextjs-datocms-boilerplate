@@ -1,52 +1,50 @@
 import { revalidatePath } from "next/cache";
 
-export default async function withRevalidate(
-  callback: (record: any, revalidate: (paths: string[]) => Promise<Response>) => Promise<void>) {
+export default async function withRevalidate(req: Request, callback: (record: any, revalidate: (paths: string[]) => Promise<Response>) => Promise<Response>) {
+  console.log('withRevalidate', req.url)
+  if (req.method === 'GET' && new URLSearchParams(req.url.split('?')?.[1]).get('ping'))
+    return new Response('ok', { status: 200 })
 
-  return async (req: Request, res: Response) => {
+  if (!basicAuth(req))
+    return new Response('unauthorized', { status: 401 })
 
-    if (req.method === 'GET' && new URLSearchParams(req.url.split('?')?.[1]).get('ping'))
-      return new Response('ok', { status: 200 })
+  const payload = await req.json();
 
-    if (!basicAuth(req))
-      return new Response('unauthorized', { status: 401 })
-
-    const payload = await req.json();
-
-    if (!payload || !payload?.entity)
-      return new Response('Payload empty or missing entity', { status: 400 })
+  if (!payload || !payload?.entity)
+    return new Response('Payload empty or missing entity', { status: 400 })
 
 
-    const { entity, related_entities, event_type } = payload
-    const model = related_entities.find(({ id }) => id === entity.relationships?.item_type?.data?.id)
+  const { entity, related_entities, event_type } = payload
+  const model = related_entities.find(({ id }) => id === entity.relationships?.item_type?.data?.id)
 
-    if (!model)
-      return new Response('Model not found in payload', { status: 400 })
+  if (!model)
+    return new Response('Model not found in payload', { status: 400 })
 
-    const record = { ...entity.attributes, model: model.attributes }
-    const delay = Date.now() - Math.max(new Date(entity.meta.updated_at).getTime(), new Date(entity.meta.published_at).getTime(), new Date(entity.meta.created_at).getTime())
+  const record = { ...entity.attributes, model: model.attributes }
+  const delay = Date.now() - Math.max(new Date(entity.meta.updated_at).getTime(), new Date(entity.meta.published_at).getTime(), new Date(entity.meta.created_at).getTime())
 
-    await callback(record, async (paths) => {
-      try {
-        if (!paths)
-          return new Response('Nothing to revalidate. Paths empty', { status: 400 })
+  return await callback(record, async (paths) => {
+    try {
+      if (!paths)
+        return new Response('Nothing to revalidate. Paths empty', { status: 400 })
 
-        if (paths.length === 0)
-          return new Response(JSON.stringify({ revalidated: false, paths, delay, event_type }), { status: 200, headers: { 'content-type': 'application/json' } })
+      if (paths.length === 0)
+        return new Response(JSON.stringify({ revalidated: false, paths, delay, event_type }), { status: 200, headers: { 'content-type': 'application/json' } })
 
-        paths.forEach(p => revalidatePath(p))
+      paths.forEach(p => revalidatePath(p))
 
-        console.log(`revalidate${delay && !['unpublish', 'delete'].includes(event_type) ? ` (${delay}ms)` : ''} ${event_type}`, paths)
+      console.log(`revalidate${delay && !['unpublish', 'delete'].includes(event_type) ? ` (${delay}ms)` : ''} ${event_type}`, paths)
 
-        return new Response(JSON.stringify({ revalidated: true, paths, delay, event_type }), { status: 200, headers: { 'content-type': 'application/json' } })
-      } catch (err) {
-        console.log('Error revalidating', paths)
-        console.error(err)
-        return new Response(JSON.stringify({ revalidated: false, paths, err, delay, event_type }), { status: 200, headers: { 'content-type': 'application/json' } })
-      }
-    })
-  }
+      return new Response(JSON.stringify({ revalidated: true, paths, delay, event_type }), { status: 200, headers: { 'content-type': 'application/json' } })
+    } catch (err) {
+      console.log('Error revalidating', paths)
+      console.error(err)
+      return new Response(JSON.stringify({ revalidated: false, paths, err, delay, event_type }), { status: 200, headers: { 'content-type': 'application/json' } })
+    }
+  })
+
 }
+
 
 export const basicAuth = (req: Request) => {
 

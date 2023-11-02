@@ -1,22 +1,25 @@
 
-import { default as POST } from './withRevalidate';
+import withRevalidate from './withRevalidate';
 
 export const runtime = "edge"
 
-export default POST(async (record, revalidate) => {
+export async function POST(req: Request) {
 
-  const { api_key } = record.model;
-  const { slug } = record
-  const paths = []
+  return await withRevalidate(req, async (record, revalidate) => {
 
-  switch (api_key) {
-    case 'post':
-      paths.push(`/posts/${slug}`)
-      paths.push(`/`)
-      break;
-    default:
-      break;
-  }
+    const { api_key } = record.model;
+    const { slug } = record
+    const paths = []
 
-  await revalidate(paths)
-})
+    switch (api_key) {
+      case 'post':
+        paths.push(`/posts/${slug}`)
+        paths.push(`/`)
+        break;
+      default:
+        break;
+    }
+
+    return revalidate(paths)
+  })
+}
