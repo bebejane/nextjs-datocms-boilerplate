@@ -1,8 +1,6 @@
 import { withWebPreviewsEdge as POST } from 'dato-nextjs-utils/hoc';
 
-export const config = {
-  runtime: 'edge'
-}
+export const runtime = "edge"
 
 export default POST(async ({ item, itemType, locale }) => {
 

@@ -1,6 +1,8 @@
 
 import { default as POST } from './withRevalidate';
 
+export const runtime = "edge"
+
 export default POST(async (record, revalidate) => {
 
   const { api_key } = record.model;
