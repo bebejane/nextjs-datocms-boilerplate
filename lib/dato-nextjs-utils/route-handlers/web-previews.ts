@@ -6,12 +6,6 @@ export type PreviewLink = {
   url: string
 }
 
-const corsOptions = {
-  origin: '*',
-  methods: ['POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  preflightContinue: false,
-}
 
 export default async function webPreviews(req: NextRequest, generatePreviewUrl: (record: any) => Promise<string | null>): Promise<Response> {
 
@@ -20,9 +14,6 @@ export default async function webPreviews(req: NextRequest, generatePreviewUrl: 
 
   if (!process.env.DATOCMS_PREVIEW_SECRET)
     throw new Error('DATOCMS_PREVIEW_SECRET is not set in .env')
-
-  if (req.method === 'OPTIONS')
-    return cors(req, new Response('ok', { status: 200 }), corsOptions)
 
   const payload = await req.json()
 
@@ -45,10 +36,8 @@ export default async function webPreviews(req: NextRequest, generatePreviewUrl: 
     previewLinks.push({ label: 'Preview', url: `${baseUrl}/api/preview?slug=${path}&secret=${process.env.DATOCMS_PREVIEW_SECRET}` })
   }
 
-  return cors(
-    req,
-    new Response(JSON.stringify({ previewLinks }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    }), corsOptions)
+  return new Response(JSON.stringify({ previewLinks }), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' },
+  })
 }
