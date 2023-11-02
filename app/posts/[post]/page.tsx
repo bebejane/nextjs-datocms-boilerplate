@@ -1,8 +1,8 @@
 'use server'
 'use server'
 
-import { notFound } from 'next/navigation';
 import s from './page.module.scss'
+import { notFound } from 'next/navigation';
 import { apiQuery } from '/lib/client';
 import { PostDocument } from '/lib/graphql';
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components';
