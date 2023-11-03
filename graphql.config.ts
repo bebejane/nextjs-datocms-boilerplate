@@ -19,7 +19,7 @@ const config: IGraphQLConfig = {
 			},
 		},
 	},
-	documents: "lib/graphql/**/*.gql",
+	documents: "graphql/**/*.gql",
 	extensions: {
 		codegen: {
 			overwrite: true,
@@ -31,7 +31,7 @@ const config: IGraphQLConfig = {
 					],
 					config: { ...defaultConfig, noExport: true }
 				},
-				"lib/graphql/index.ts": {
+				"graphql/index.ts": {
 					plugins: ["typed-document-node"],
 					config: { ...defaultConfig }
 				},
