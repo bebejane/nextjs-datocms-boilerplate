@@ -1,12 +1,14 @@
 'use server'
+
 import s from './page.module.scss'
 import Link from "next/link"
 import { apiQuery } from '/lib/client';
 import { AllPostsDocument } from '/lib/graphql';
+import { draftMode } from 'next/headers'
 
 export default async function Home() {
 
-  const { posts } = await apiQuery<AllPostsQuery>(AllPostsDocument);
+  const { posts } = await apiQuery<AllPostsQuery>(AllPostsDocument, { includeDrafts: draftMode().isEnabled });
 
   return (
     <div className={s.container}>
@@ -23,5 +25,4 @@ export default async function Home() {
       {posts.length === 0 && 'No posts yet...'}
     </div>
   )
-
 }

@@ -1,6 +1,45 @@
+'use server';
+
 import { DocumentNode } from 'graphql';
 import { print } from 'graphql';
 import { cache } from 'react';
+
+export type ApiQueryOptions = {
+  variables?: Record<string, any>;
+  includeDrafts?: boolean;
+  excludeInvalid?: boolean;
+  visualEditingBaseUrl?: string;
+  revalidate?: number;
+};
+
+export async function apiQuery<T>(
+  query: DocumentNode,
+  options: ApiQueryOptions = {
+    variables: {},
+    includeDrafts: false,
+    excludeInvalid: false,
+    visualEditingBaseUrl: null,
+    revalidate: null,
+  }) {
+
+  const {
+    variables,
+    includeDrafts,
+    excludeInvalid,
+    visualEditingBaseUrl,
+    revalidate,
+  } = options;
+
+  const { data } = await dedupedFetch(
+    JSON.stringify({ query: print(query), variables, revalidate }),
+    includeDrafts,
+    excludeInvalid,
+    visualEditingBaseUrl,
+    revalidate,
+  );
+
+  return data as T;
+}
 
 const dedupedFetch = cache(
   async (
@@ -47,39 +86,3 @@ const dedupedFetch = cache(
   },
 );
 
-export type ApiQueryOptions = {
-  variables?: Record<string, any>;
-  includeDrafts?: boolean;
-  excludeInvalid?: boolean;
-  visualEditingBaseUrl?: string;
-  revalidate?: number;
-};
-
-export async function apiQuery<T>(
-  query: DocumentNode,
-  options: ApiQueryOptions = {
-    variables: {},
-    includeDrafts: false,
-    excludeInvalid: false,
-    visualEditingBaseUrl: null,
-    revalidate: null,
-  }) {
-
-  const {
-    variables,
-    includeDrafts,
-    excludeInvalid,
-    visualEditingBaseUrl,
-    revalidate,
-  } = options;
-
-  const { data } = await dedupedFetch(
-    JSON.stringify({ query: print(query), variables, revalidate }),
-    includeDrafts,
-    excludeInvalid,
-    visualEditingBaseUrl,
-    revalidate,
-  );
-
-  return data as T;
-}
