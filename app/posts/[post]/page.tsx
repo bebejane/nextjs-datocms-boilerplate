@@ -3,7 +3,7 @@
 import s from './page.module.scss'
 import { notFound } from 'next/navigation';
 import { apiQuery } from '/lib/client';
-import { AllPostsDocument, PostDocument } from '/lib/graphql';
+import { AllPostsDocument, PostDocument } from '/graphql';
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components';
 import { draftMode } from 'next/headers'
 

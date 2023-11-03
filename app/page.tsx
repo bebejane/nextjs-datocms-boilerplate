@@ -3,7 +3,7 @@
 import s from './page.module.scss'
 import Link from "next/link"
 import { apiQuery } from '/lib/client';
-import { AllPostsDocument } from '/lib/graphql';
+import { AllPostsDocument } from '/graphql';
 import { draftMode } from 'next/headers'
 
 export default async function Home() {

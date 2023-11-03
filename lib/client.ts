@@ -1,6 +1,8 @@
 'use server';
 
+//@ts-ignore
 import { DocumentNode } from 'graphql';
+//@ts-ignore
 import { print } from 'graphql';
 import { cache } from 'react';
 

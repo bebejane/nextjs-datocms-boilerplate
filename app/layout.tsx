@@ -1,7 +1,7 @@
 import '/styles/index.scss'
 import { DatoAdminLink } from '/components';
 import { apiQuery } from '/lib/client';
-import { GlobalDocument } from '/lib/graphql';
+import { GlobalDocument } from '/graphql';
 import { Metadata } from 'next';
 import { Icon } from 'react-datocms/seo';
 

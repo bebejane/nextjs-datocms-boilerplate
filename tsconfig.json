@@ -24,7 +24,7 @@
         "/components"
       ],
       "graphql/*": [
-        "/lib/graphql"
+        "/graphql"
       ],
       "lib/*": [
         "/lib"
