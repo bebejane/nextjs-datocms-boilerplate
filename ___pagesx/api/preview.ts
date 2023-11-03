@@ -1,1 +1,0 @@
-export { withPreview as default } from "dato-nextjs-utils/hoc"
