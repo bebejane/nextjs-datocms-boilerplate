@@ -18,6 +18,7 @@ type Scalars = {
   FloatType: { input: any; output: any; }
   IntType: { input: any; output: any; }
   ItemId: { input: any; output: any; }
+  JsonField: { input: any; output: any; }
   MetaTagAttributes: { input: any; output: any; }
   UploadId: { input: any; output: any; }
 };
@@ -35,6 +36,7 @@ type AuthorModelFilter = {
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
   createdAt?: InputMaybe<CreatedAtFilter>;
   id?: InputMaybe<ItemIdFilter>;
+  json?: InputMaybe<JsonFilter>;
   name?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
 };
@@ -84,6 +86,7 @@ type AuthorRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime']['output'];
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ItemId']['output'];
+  json?: Maybe<Scalars['JsonField']['output']>;
   name: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
@@ -134,6 +137,34 @@ type ColorField = {
 type ColorFilter = {
   /** Filter records with the specified field defined (i.e. with any value) or not */
   exists?: InputMaybe<Scalars['BooleanType']['input']>;
+};
+
+/** Record of type Config (config) */
+type ConfigRecord = RecordInterface & {
+  __typename?: 'ConfigRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  pageSize?: Maybe<Scalars['IntType']['output']>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Record of type Config (config) */
+type ConfigRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
 };
 
 /** Specifies how to filter by creation datetime */
@@ -1533,6 +1564,12 @@ type ImgixParams = {
    */
   skip?: InputMaybe<Scalars['IntType']['input']>;
   /**
+   * Bypasses any [DatoCMS Automatic Image Optimization](https://www.datocms.com/docs/cdn-settings/advanced-asset-settings) that might be set up for the project.
+   *
+   * Exercise caution when using this parameter, as it could significantly increase your bandwidth costs.
+   */
+  skipDefaultOptimizations?: InputMaybe<Scalars['BooleanType']['input']>;
+  /**
    * Transparency
    *
    * Adds checkerboard behind images which support transparency.
@@ -2097,6 +2134,12 @@ enum ItemStatus {
   updated = 'updated'
 }
 
+/** Specifies how to filter JSON fields */
+type JsonFilter = {
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']['input']>;
+};
+
 /** Specifies how to filter Single-link fields */
 type LinkFilter = {
   /** Search for records with an exact match. The specified value must be a Record ID */
@@ -2289,6 +2332,7 @@ type PostModelFilter = {
   link?: InputMaybe<LinkFilter>;
   password?: InputMaybe<StringFilter>;
   slug?: InputMaybe<SlugFilter>;
+  structuredContent?: InputMaybe<StructuredTextFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
 };
@@ -2326,6 +2370,13 @@ enum PostModelOrderBy {
   updatedAt_DESC = 'updatedAt_DESC'
 }
 
+type PostModelStructuredContentField = {
+  __typename?: 'PostModelStructuredContentField';
+  blocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
 /** Record of type Post (post) */
 type PostRecord = RecordInterface & {
   __typename?: 'PostRecord';
@@ -2352,6 +2403,7 @@ type PostRecord = RecordInterface & {
   link?: Maybe<PostModelLinkField>;
   password?: Maybe<Scalars['String']['output']>;
   slug: Scalars['String']['output'];
+  structuredContent?: Maybe<PostModelStructuredContentField>;
   title: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
@@ -2456,6 +2508,7 @@ type ProductModelFilter = {
   createdAt?: InputMaybe<CreatedAtFilter>;
   id?: InputMaybe<ItemIdFilter>;
   price?: InputMaybe<LinksFilter>;
+  shopifyId?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
 };
@@ -2481,6 +2534,8 @@ enum ProductModelOrderBy {
   createdAt_DESC = 'createdAt_DESC',
   id_ASC = 'id_ASC',
   id_DESC = 'id_DESC',
+  shopifyId_ASC = 'shopifyId_ASC',
+  shopifyId_DESC = 'shopifyId_DESC',
   title_ASC = 'title_ASC',
   title_DESC = 'title_DESC',
   updatedAt_ASC = 'updatedAt_ASC',
@@ -2506,6 +2561,7 @@ type ProductRecord = RecordInterface & {
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ItemId']['output'];
   price: Array<PriceRecord>;
+  shopifyId?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
 };
@@ -2577,6 +2633,8 @@ type Query = {
   allUploads: Array<FileField>;
   /** Returns a specific record */
   author?: Maybe<AuthorRecord>;
+  /** Returns the single instance record */
+  config?: Maybe<ConfigRecord>;
   /** Returns a specific record */
   currency?: Maybe<CurrencyRecord>;
   /** Returns a specific record */
@@ -2777,6 +2835,13 @@ type QueryauthorArgs = {
 
 
 /** The query root for this schema */
+type QueryconfigArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
 type QuerycurrencyArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<CurrencyModelFilter>;
@@ -2914,6 +2979,7 @@ type SeoField = {
   __typename?: 'SeoField';
   description?: Maybe<Scalars['String']['output']>;
   image?: Maybe<FileField>;
+  noIndex?: Maybe<Scalars['BooleanType']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   twitterCard?: Maybe<Scalars['String']['output']>;
 };
@@ -2924,6 +2990,7 @@ type Site = {
   faviconMetaTags: Array<Tag>;
   globalSeo?: Maybe<GlobalSeoField>;
   locales: Array<SiteLocale>;
+  noIndex?: Maybe<Scalars['BooleanType']['output']>;
 };
 
 
@@ -3020,6 +3087,20 @@ type StringMatchesFilter = {
   caseSensitive?: InputMaybe<Scalars['BooleanType']['input']>;
   pattern: Scalars['String']['input'];
   regexp?: InputMaybe<Scalars['BooleanType']['input']>;
+};
+
+/** Specifies how to filter Structured Text fields values */
+type StructuredTextFilter = {
+  /** Filter records with the specified field defined (i.e. with any value) or not [DEPRECATED] */
+  exists?: InputMaybe<Scalars['BooleanType']['input']>;
+  /** Filter records with the specified field set as blank (null or single empty paragraph) */
+  isBlank?: InputMaybe<Scalars['BooleanType']['input']>;
+  /** Filter records with the specified field present (neither null, nor empty string) */
+  isPresent?: InputMaybe<Scalars['BooleanType']['input']>;
+  /** Filter records based on a regular expression */
+  matches?: InputMaybe<StringMatchesFilter>;
+  /** Exclude records based on a regular expression */
+  notMatches?: InputMaybe<StringMatchesFilter>;
 };
 
 type Tag = {
@@ -3367,13 +3448,34 @@ type UploadUpdatedAtFilter = {
 
 type UploadVideoField = {
   __typename?: 'UploadVideoField';
+  alt?: Maybe<Scalars['String']['output']>;
+  blurUpThumb?: Maybe<Scalars['String']['output']>;
+  blurhash?: Maybe<Scalars['String']['output']>;
   duration?: Maybe<Scalars['Int']['output']>;
   framerate?: Maybe<Scalars['Int']['output']>;
+  height: Scalars['IntType']['output'];
   mp4Url?: Maybe<Scalars['String']['output']>;
   muxAssetId: Scalars['String']['output'];
   muxPlaybackId: Scalars['String']['output'];
   streamingUrl: Scalars['String']['output'];
+  thumbhash?: Maybe<Scalars['String']['output']>;
   thumbnailUrl: Scalars['String']['output'];
+  title?: Maybe<Scalars['String']['output']>;
+  width: Scalars['IntType']['output'];
+};
+
+
+type UploadVideoFieldaltArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+type UploadVideoFieldblurUpThumbArgs = {
+  imgixParams?: InputMaybe<ImgixParams>;
+  punch?: Scalars['Float']['input'];
+  quality?: Scalars['Int']['input'];
+  size?: Scalars['Int']['input'];
 };
 
 
@@ -3385,6 +3487,12 @@ type UploadVideoFieldmp4UrlArgs = {
 
 type UploadVideoFieldthumbnailUrlArgs = {
   format?: InputMaybe<MuxThumbnailFormatType>;
+};
+
+
+type UploadVideoFieldtitleArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
 };
 
 /** Specifies how to filter by width */
